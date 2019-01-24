@@ -5,11 +5,11 @@ website: ${project.url}
 description: ${project.description}
 authors: [RustyTrumbone]
 depend: [MassiveCore]
+permissions:
 
 # -------------------------------------------- #
 # THE REAL NODES
 # -------------------------------------------- #
-permissions:
   massivemarriage.basecommand: {description: use the MassiveMarriage base command , default: false}
   massivemarriage.propose:     {description: send a proposal to another player, default: false}
   massivemarriage.unpropose:   {description: cancel a proposal sent, default: false}
@@ -23,17 +23,17 @@ permissions:
 # -------------------------------------------- #
 # START NOTATION
 # -------------------------------------------- #
-massivemarriage.*:
-  children:
-    massivemarriage.basecommand: true
-    massivemarriage.propose: true
-    massivemarriage.unpropose: true
-    massivemarriage.accept: true
-    massivemarriage.deny: true
-    massivemarriage.show: true
-    massivemarriage.divorce: true
-    massivemarriage.config: true
-    massivemarriage.version: true
+  massivemarriage.*:
+    children:
+      massivemarriage.basecommand: true
+      massivemarriage.propose: true
+      massivemarriage.unpropose: true
+      massivemarriage.accept: true
+      massivemarriage.deny: true
+      massivemarriage.show: true
+      massivemarriage.divorce: true
+      massivemarriage.config: true
+      massivemarriage.version: true
 
 # -------------------------------------------- #
 # KITS

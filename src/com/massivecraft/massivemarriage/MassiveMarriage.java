@@ -10,8 +10,6 @@ import com.massivecraft.massivemarriage.engine.EngineXPBoost;
 import com.massivecraft.massivemarriage.entity.MConfColl;
 import com.massivecraft.massivemarriage.entity.MPlayerColl;
 
-import java.util.List;
-
 public class MassiveMarriage extends MassivePlugin
 {
 	// -------------------------------------------- //
