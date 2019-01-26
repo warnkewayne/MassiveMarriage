@@ -1,5 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.util.IdUtil;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -8,6 +11,7 @@ import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 import com.massivecraft.massivecore.MassiveException;
 
 import org.bukkit.ChatColor;
+import org.checkerframework.checker.units.qual.Mass;
 
 import java.util.List;
 
@@ -18,8 +22,9 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	// -------------------------------------------- //
 	public CmdMarriageProposeRemove()
 	{
-		// No Parameters
 		this.addParameter(TypeMPlayer.get());
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.UNPROPOSE));
 	}
 	
 	// -------------------------------------------- //
@@ -41,6 +46,9 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 			
 			if (event.isCancelled()) return;
 
+			// Check if sent name matches with proposed player.
+			if ( ! (msender.getPartnerId() == IdUtil.getId(mplayer)) ) throw new MassiveException().addMsg("<b>You did not propose to them.");
+			
 			hasPendingProposal = event.hasNewProposal();
 			
 			// Inform Player

@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.MassiveCommand;
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class CmdMarriage extends MassiveCommand
 		this.addChild(this.cmdMarriageConfig);
 		this.addChild(this.cmdMarriageVersion);
 		
+		this.addRequirements(RequirementHasPerm.get(Perm.BASECOMMAND));
 	}
 	
 	// -------------------------------------------- //

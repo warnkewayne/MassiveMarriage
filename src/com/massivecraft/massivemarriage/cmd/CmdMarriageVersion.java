@@ -17,10 +17,7 @@ public class CmdMarriageVersion extends MassiveCommandVersion
 	public CmdMarriageVersion()
 	{
 		super(MassiveMarriage.get());
-		
-		// Requirements
 		this.addRequirements(RequirementHasPerm.get(Perm.VERSION));
-		
 	}
 	
 	// -------------------------------------------- //

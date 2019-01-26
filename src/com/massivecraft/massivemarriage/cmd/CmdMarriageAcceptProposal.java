@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivemarriage.MassiveMarriage;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -26,6 +28,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 	public CmdMarriageAcceptProposal()
 	{
 		this.addParameter(TypeMPlayer.get());
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.ACCEPT));
 	}
 	
 	// -------------------------------------------- //
@@ -52,7 +56,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		if ( mplayer.getIsMarried() ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
 		
 		// Check if Sender is married
-		if (msender.getIsMarried() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal."); //.color(ChatColor.RED);
+		if ( msender.getIsMarried() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal."); //.color(ChatColor.RED);
 		
 		// Marriage Costs Regals
 		if ( MConf.get().marriageCostRegals )

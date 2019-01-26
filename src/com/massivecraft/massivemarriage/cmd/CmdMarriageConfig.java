@@ -17,9 +17,7 @@ public class CmdMarriageConfig extends CommandEditSingleton<MConf>
 	{
 		super(MConf.get());
 		
-		// Requirements
 		this.addRequirements(RequirementHasPerm.get(Perm.CONFIG));
-		
 	}
 	
 	// -------------------------------------------- //

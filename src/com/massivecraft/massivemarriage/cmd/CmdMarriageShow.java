@@ -1,5 +1,7 @@
 package com.massivecraft.massivemarriage.cmd;
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -13,7 +15,12 @@ public class CmdMarriageShow extends MarriageCommand
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CmdMarriageShow() {} // No parameters
+	public CmdMarriageShow()
+	{
+		// No parameters
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.SHOW));
+	}
 	
 	// -------------------------------------------- //
 	// OVERRIDE

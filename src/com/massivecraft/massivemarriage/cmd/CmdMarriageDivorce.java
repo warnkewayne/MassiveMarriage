@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivemarriage.MassiveMarriage;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
 import com.massivecraft.massivemarriage.event.EventMarriageStatusChange;
@@ -17,7 +19,12 @@ public class CmdMarriageDivorce extends MarriageCommand
 	// CONSTRUCT
 	// -------------------------------------------- //
 	
-	public CmdMarriageDivorce() {} // No parameters
+	public CmdMarriageDivorce()
+	{
+		// No parameters
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.DIVORCE));
+	}
 	
 	// -------------------------------------------- //
 	// OVERRIDE

@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -33,6 +35,8 @@ public class CmdMarriagePropose extends MarriageCommand
 		// Parameters
 		// Grabs args from command
 		this.addParameter(TypeMPlayer.get());
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.PROPOSE));
 	}
 	
 	// -------------------------------------------- //
@@ -84,7 +88,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				
 				Mson mson = Mson.mson(
 					mson(sendingPlayer.getName() + " has proposed to you!"),
-					mson("<Accept> ").color(ChatColor.GREEN).suggest(accept),
+					mson(" <Accept> ").color(ChatColor.GREEN).suggest(accept),
 					mson(" <Deny>").color(ChatColor.RED).suggest(deny)
 				);
 				
@@ -107,7 +111,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				
 				Mson remove = mson(
 					mson("You already have a pending proposal.").color(ChatColor.YELLOW),
-					mson("<Remove>").color(ChatColor.RED).suggest(command)
+					mson(" <Remove>").color(ChatColor.RED).suggest(command)
 				);
 				
 				// Inform

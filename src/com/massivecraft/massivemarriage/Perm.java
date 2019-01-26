@@ -9,16 +9,24 @@ public enum Perm implements Identified
 	// -------------------------------------------- //
 	// ENUM
 	// -------------------------------------------- //
-
-//	 BASECOMMAND,
-//	 PROPOSE,
-//	 PROPOSE_REMOVE,
-//	 ACCEPT,
-//	 DENY,
-//	 SHOW,
-//	 DIVORCE,
-	 CONFIG,
-	 VERSION,
+	
+	BASECOMMAND,
+	
+	PROPOSE,
+	
+	UNPROPOSE,
+	
+	ACCEPT,
+	
+	DENY,
+	
+	DIVORCE,
+	
+	SHOW,
+	
+	CONFIG,
+	
+	VERSION,
 	
 	 //END OF LIST
 	;

@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
 
+import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -23,6 +25,8 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 	public CmdMarriageDenyProposal()
 	{
 		this.addParameter(TypeMPlayer.get());
+		
+		this.addRequirements(RequirementHasPerm.get(Perm.DENY));
 	}
 	
 	// -------------------------------------------- //
