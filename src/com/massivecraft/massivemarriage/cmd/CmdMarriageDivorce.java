@@ -34,7 +34,7 @@ public class CmdMarriageDivorce extends MarriageCommand
 	public void perform() throws MassiveException
 	{
 		// Check if sender is married
-		if( msender.getPartnerId() == null ) throw new MassiveException().addMsg("<b>You are not married.");
+		if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are not married.");
 		
 		// Get msender info
 		String partnerId = msender.getPartnerId();

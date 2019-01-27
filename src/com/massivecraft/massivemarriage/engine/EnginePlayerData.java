@@ -42,7 +42,7 @@ public class EnginePlayerData extends Engine
 		if ( mplayer == null ) return;
 		
 		// ... if banned player is married
-		if ( mplayer.getPartnerId() != null )
+		if ( mplayer.hasPartner() )
 		{
 			// ... get there partner info
 			MPlayer partner = MPlayer.get(mplayer.getPartnerId());

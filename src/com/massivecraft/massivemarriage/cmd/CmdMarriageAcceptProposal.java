@@ -55,10 +55,10 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 			
 		// Check Player is married
-		if ( mplayer.getPartnerId() != null ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!");
+		if ( mplayer.hasPartner() ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!");
 		
 		// Check if Sender is married
-		if ( msender.getPartnerId() != null ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
+		if ( msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
 		
 		// Marriage Costs Regals
 		if ( MConf.get().marriageCostRegals )

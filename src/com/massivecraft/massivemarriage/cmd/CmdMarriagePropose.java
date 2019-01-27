@@ -59,13 +59,13 @@ public class CmdMarriagePropose extends MarriageCommand
 			}
 			
 			// Sender is already married?
-			if ( sendingPlayer.getPartnerId() != null )
+			if ( sendingPlayer.hasPartner() )
 			{
 				throw new MassiveException().addMsg("<b>You are already married!");
 			}
 		
 			// Player is already married?
-			if ( mplayer.getPartnerId() != null )
+			if ( mplayer.hasPartner() )
 			{
 				throw new MassiveException().addMsg(mplayer.getName() + " <b>is already married. Don't be a homewrecker!");
 			}

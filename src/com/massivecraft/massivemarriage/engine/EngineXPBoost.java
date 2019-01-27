@@ -37,7 +37,7 @@ public class EngineXPBoost extends Engine
 		final MPlayer mplayer = MPlayer.get(player);
 		
 		// If partner is married ...
-		if( mplayer.getPartnerId() != null ) return;
+		if( ! mplayer.hasPartner() ) return;
 		final Player pPartner = IdUtil.getPlayer(mplayer.getPartnerId());
 		
 		if (MUtil.isntPlayer(pPartner)) return;

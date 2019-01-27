@@ -28,7 +28,7 @@ public class CmdMarriageShow extends MarriageCommand
 	@Override
 	public void perform() throws MassiveException
 	{
-		if( msender.getPartnerId() == null ) throw new MassiveException().addMsg("<b>You are not married!");
+		if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are not married!");
 		
 		String partnerId = msender.getPartnerId();
 		MPlayer partner = MPlayer.get(partnerId);
