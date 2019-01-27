@@ -1,6 +1,8 @@
 package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mixin.MixinMessage;
+import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivemarriage.MassiveMarriage;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
@@ -46,17 +48,17 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 		// Check Player has proposal request
 		// Does mplayer have pending proposal?
-		if ( ! mplayer.getPendingProposal() ) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
+		if ( mplayer.getProposedPlayerId() != null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
 	
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
 		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
 			
 		// Check Player is married
-		if ( mplayer.getIsMarried() ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
+		if ( mplayer.getPartnerId() != null ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
 		
 		// Check if Sender is married
-		if ( msender.getIsMarried() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal."); //.color(ChatColor.RED);
+		if ( msender.getPartnerId() != null ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal."); //.color(ChatColor.RED);
 		
 		// Marriage Costs Regals
 		if ( MConf.get().marriageCostRegals )
@@ -68,9 +70,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 				// Check if mplayer has the money
 				if ( ! Money.has(mplayer, marriageCost) )
 				{
-					double moneyPossesed = Money.get(mplayer);
-					double moneyMissing = marriageCost - moneyPossesed;
-					this.sendCheckFailMessage(mplayer, "money", marriageCost, moneyPossesed, moneyMissing);
+					double moneyPossessed = Money.get(mplayer);
+					double moneyMissing = marriageCost - moneyPossessed;
+					this.sendCheckFailMessage(mplayer, "money", marriageCost, moneyPossessed, moneyMissing);
 					return;
 				}
 				
@@ -103,13 +105,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 		// Apply
 		mplayer.setPartnerId(senderId);
-		mplayer.setIsMarried(true);
-		mplayer.setPendingProposal(false);
 		mplayer.setProposedPlayerId(null);
 		
 		msender.setPartnerId(mplayerId);
-		msender.setIsMarried(true);
-		msender.setPendingProposal(false);
 		msender.setProposedPlayerId(null);
 
 		// Inform
@@ -125,12 +123,16 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		// Server Broadcasts
 		if ( MConf.get().broadcastMarriages )
 		{
+			//Mson
+			Mson broadcastTitle = Mson.mson("[MassiveMarriage] ");
+			broadcastTitle = broadcastTitle.color(ChatColor.DARK_AQUA);
+			Mson message = Mson.mson(msender.getName() + " and " + mplayer.getName() + " have gotten married!");
+			message = message.color(ChatColor.WHITE);
+			
+			Mson fullMessage = Mson.mson(broadcastTitle).add(message);
+			
 			// Broadcast a message
-			Bukkit.broadcastMessage(
-				ChatColor.DARK_AQUA + "[MassiveMarriage] " +
-					ChatColor.WHITE + msender.getName() +
-					" and " + mplayer.getName() + " have gotten married!"
-			);
+			MixinMessage.get().messageAll(fullMessage);
 		}
 		
 	}

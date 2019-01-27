@@ -58,7 +58,6 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		mplayer.msg("%s<i> has denied your proposal.", sender.getName());
 		
 		// Apply
-		mplayer.setPendingProposal(false);
 		mplayer.setProposedPlayerId(null);
 		
 	}

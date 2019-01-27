@@ -34,14 +34,13 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	@Override
 	public void perform() throws MassiveException
 	{
-		boolean hasPendingProposal = msender.getPendingProposal();
 		MPlayer mplayer = this.readArg();
 		
 		// Check if player has pending proposal
-		if ( hasPendingProposal )
+		if ( mplayer.getProposedPlayerId() != null )
 		{
 			// Event
-			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, hasPendingProposal);
+			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, true);
 			event.run();
 			
 			if (event.isCancelled()) return;
@@ -49,14 +48,11 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 			// Check if sent name matches with proposed player.
 			if ( ! (msender.getPartnerId() == IdUtil.getId(mplayer)) ) throw new MassiveException().addMsg("<b>You did not propose to them.");
 			
-			hasPendingProposal = event.hasNewProposal();
-			
 			// Inform Player
 			mplayer.msg("%s<i> has cancelled their proposal.", msender.getName());
 			msender.msg("You have cancelled your proposal to %s<i>", mplayer.getName());
 			
 			// Apply
-			msender.setPendingProposal(false);
 			msender.setProposedPlayerId(null);
 		}
 		else

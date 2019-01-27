@@ -61,26 +61,24 @@ public class CmdMarriagePropose extends MarriageCommand
 			}
 			
 			// Sender is already married?
-			if ( sendingPlayer.getIsMarried() )
+			if ( sendingPlayer.getPartnerId() != null )
 			{
 				throw new MassiveException().addMsg("You are already married!"); //.color(ChatColor.RED);
 			}
 		
 			// Player is already married?
-			if (mplayer.getIsMarried())
+			if ( mplayer.getPartnerId() != null )
 			{
 				throw new MassiveException().addMsg(mplayer.getName() + " is already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
 			}
 			
 			// Already proposed?
-			boolean hasProposal = sendingPlayer.getPendingProposal();
-			if ( ! hasProposal )
+			if ( mplayer.getProposedPlayerId() == null )
 			{
 				// Event
-				EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, hasProposal);
+				EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, false);
 				event.run();
 				if (event.isCancelled()) return;
-				hasProposal = event.hasNewProposal();
 				
 				// Mson
 				String accept = CmdMarriage.get().cmdMarriageAcceptProposal.getCommandLine(msender.getName());
@@ -100,7 +98,6 @@ public class CmdMarriagePropose extends MarriageCommand
 				
 				// Apply
 				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);
-				sendingPlayer.setPendingProposal(true);
 				sendingPlayer.setProposedPlayerId(mplayerId);
 			}
 			

@@ -1,5 +1,6 @@
 package com.massivecraft.massivemarriage.engine;
 
+import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayerColl;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -41,8 +42,8 @@ public class EngineXPBoost extends Engine
 		final MPlayer mplayer = MPlayer.get(player);
 		
 		// If partner is married ...
-		if( ! mplayer.getIsMarried() ) return;
-		final Player pPartner = Bukkit.getPlayer(UUID.fromString(mplayer.getPartnerId()));
+		if( mplayer.getPartnerId() != null ) return;
+		final Player pPartner = IdUtil.getPlayer(mplayer.getPartnerId());
 		
 		if (MUtil.isntPlayer(pPartner)) return;
 		
@@ -75,3 +76,5 @@ public class EngineXPBoost extends Engine
 		
 	}
 }
+
+

@@ -21,9 +21,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	{
 		this.setLastActivityMillis(that.lastActivityMillis);
 		this.setPartnerId(that.partnerId);
-		this.setPendingProposal(that.pendingProposal);
 		this.setProposedPlayerId(that.proposedPlayerId);
-		this.setIsMarried(that.isMarried);
 		
 		return this;
 	}
@@ -42,25 +40,12 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// Each player may be married to one other player
 	// Null is default (No marriage partner)
 	private String partnerId = null;
-	
-	
-	// This will be used to check if the player has a
-	//   proposal sent already.
-	// To limit spamming, the player will only be allowed
-	//   one pending proposal at a time.
-	// Default is false.
-	private boolean pendingProposal = false;
 
 	// This will hold the player that MPlayer has
 	// 	  sent a proposal to.
 	// Default is null.
 	private String proposedPlayerId = null;
-
-
-	// This will be used to check if the player is
-	//    already married
-	// Default is false
-	private boolean isMarried = false;
+	
 
 	// -------------------------------------------- //
 	// CORE UTILITIES
@@ -68,10 +53,8 @@ public class MPlayer extends SenderEntity<MPlayer>
 	
 	public void resetMarriageData()
 	{
-		this.isMarried = false;
 		this.partnerId = null;
 		this.proposedPlayerId = null;
-		this.pendingProposal = false;
 	}
 	
 	// -------------------------------------------- //
@@ -132,13 +115,6 @@ public class MPlayer extends SenderEntity<MPlayer>
 		
 		return false;
 	}
-	
-	// -------------------------------------------- //
-	// FIELD: pendingProposal
-	// -------------------------------------------- //
-	public boolean getPendingProposal() { return this.pendingProposal; }
-
-	public void setPendingProposal(boolean pendingProposal) { this.pendingProposal = pendingProposal; }
 
 	// -------------------------------------------- //
 	// FIELD: proposalPlayerId
@@ -146,18 +122,6 @@ public class MPlayer extends SenderEntity<MPlayer>
 	public String getProposedPlayerId() { return this.proposedPlayerId; }
 
 	public void setProposedPlayerId(String proposedPlayerId) { this.proposedPlayerId = proposedPlayerId; }
-
-
-	// -------------------------------------------- //
-	// FIELD: isMarried
-	// -------------------------------------------- //
-
-	public boolean getIsMarried() { return this.isMarried; }
-
-	public void setIsMarried(boolean isMarried)
-	{
-		this.isMarried = isMarried;
-	}
 
 	
 }

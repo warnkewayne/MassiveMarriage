@@ -29,7 +29,7 @@ public class CmdMarriageShow extends MarriageCommand
 	@Override
 	public void perform() throws MassiveException
 	{
-		if( ! msender.getIsMarried() ) throw new MassiveException().addMsg("<b>You are not married!"); //.color(ChatColor.RED);
+		if( msender.getPartnerId() == null ) throw new MassiveException().addMsg("<b>You are not married!"); //.color(ChatColor.RED);
 		
 		String partnerId = msender.getPartnerId();
 		MPlayer partner = MPlayer.get(partnerId);
