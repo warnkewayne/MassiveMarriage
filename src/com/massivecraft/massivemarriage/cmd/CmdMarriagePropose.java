@@ -50,7 +50,7 @@ public class CmdMarriagePropose extends MarriageCommand
 		long creationMillis = System.currentTimeMillis();
 		
 			// Check if player isn't ignoring the sender
-			if (mplayer.isAcknowledging(sender)) throw new MassiveException().addMsg("<b>Sorry, you cannot propose to this player.");
+			if ( ! mplayer.isAcknowledging(sender) ) throw new MassiveException().addMsg("<b>Sorry, you cannot propose to this player.");
 		
 			// Sender sending to themselves?
 			if( senderId.equals(mplayerId) )
