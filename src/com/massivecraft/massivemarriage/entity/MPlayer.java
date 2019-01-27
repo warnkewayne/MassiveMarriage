@@ -83,8 +83,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	
 	public boolean hasPartner()
 	{
-		if( this.getPartnerId() != null ) return true;
-		else { return false; }
+		return this.getPartnerId() != null;
 	}
 	
 	public void setPartnerId(String partnerId)
@@ -106,7 +105,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 		
 	}
 	
-	public boolean checkIfPartner(MPlayer mPlayer)
+	public boolean isPartner(MPlayer mPlayer)
 	{
 		String mPlayerId = IdUtil.getId(mPlayer);
 		

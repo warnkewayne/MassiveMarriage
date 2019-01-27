@@ -32,9 +32,11 @@ public class EngineKissPartner extends Engine
 	// -------------------------------------------- //
 	// KISS
 	// -------------------------------------------- //
-	@EventHandler(priority = EventPriority.MONITOR)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void kissPartner(final PlayerInteractEntityEvent event)
 	{
+		// Check if event is cancelled, or feature is disabled.
+		if ( event.isCancelled() ) return;
 		if( ! MConf.get().enableKisses ) return;
 		
 		// Gather info
@@ -46,7 +48,7 @@ public class EngineKissPartner extends Engine
 		final MPlayer cMPlayer = MPlayer.get(cPlayer);
 		
 		// If the two players are married ...
-		if( ! mplayer.checkIfPartner(cMPlayer) ) return;
+		if( ! mplayer.isPartner(cMPlayer) ) return;
 		
 		// ...and the player who clicked is sneaking ...
 		if ( ! player.isSneaking() ) return;
