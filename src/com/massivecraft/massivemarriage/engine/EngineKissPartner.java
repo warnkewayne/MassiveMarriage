@@ -61,9 +61,9 @@ public class EngineKissPartner extends Engine
 		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1);
 		
 		// ... check cooldown ...
-		if( cooldownHandler(player) ) { event.setCancelled(true); return; }
+		if( checkCooldown(player) ) { event.setCancelled(true); return; }
 		// ... inform partner of that kiss
-		cMPlayer.msg("%s<i> has kissed you <3", mplayer.getName());
+		cMPlayer.msg("%s<i> has kissed you <red> <3", mplayer.getName());
 		
 		// Cancel event to not interfere with MassiveBasic & Others
 		event.setCancelled(true);
@@ -72,7 +72,7 @@ public class EngineKissPartner extends Engine
 	// Handles Message Sending Cooldown in EngineKissPartner
 	public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
 	
-	public boolean cooldownHandler(Player player)
+	public boolean checkCooldown(Player player)
 	{
 		int cooldowntime = 60; // number of seconds
 		

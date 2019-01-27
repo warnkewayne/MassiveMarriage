@@ -5,6 +5,7 @@ import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivemarriage.entity.MPlayer;
+import org.bukkit.ChatColor;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CmdMarriageShow extends MarriageCommand
 		String partnerId = msender.getPartnerId();
 		MPlayer partner = MPlayer.get(partnerId);
 		
-		msg("<i>You are currently married to " + partner.getName());
+		msg("<i>You are currently married to <aqua>" + partner.getName());
 		
 	}
 	

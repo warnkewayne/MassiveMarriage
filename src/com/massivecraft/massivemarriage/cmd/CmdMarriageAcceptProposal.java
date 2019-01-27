@@ -48,7 +48,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 		// Check Player has proposal request
 		// Does mplayer have pending proposal?
-		if ( mplayer.getProposedPlayerId() != null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
+		if ( mplayer.getProposedPlayerId() == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 	
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
@@ -88,11 +88,14 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 				// Charge the two players regals
 				if (! Money.despawn(mplayer, mplayer, marriageCost, "MassiveMarriage") )
 				{
+					msender.msg("<b>Failed to remove money from <white>s%", mplayer.getName());
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 				
 				if (! Money.despawn(msender, msender, marriageCost, "MassiveMarriage") )
 				{
+					mplayer.msg("<b>Money returned. Failed to remove money from <white>s%.", msender.getName());
+					Money.spawn(mplayer, mplayer, marriageCost);
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 			}
@@ -111,8 +114,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		msender.setProposedPlayerId(null);
 
 		// Inform
-		mplayer.msg("You and <i>%s<i> are now married!", msender.getName());
-		msender.msg("You and <i>%s<i> are now married!", mplayer.getName());
+		mplayer.msg("<i>You and <white>%s<i> are now married!", msender.getName());
+		msender.msg("<i>You and <white>%s<i> are now married!", mplayer.getName());
 		
 		// Logging
 		if ( MConf.get().logMarriage )

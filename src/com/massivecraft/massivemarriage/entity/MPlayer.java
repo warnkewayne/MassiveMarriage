@@ -35,12 +35,12 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// Default is set to the current time.
 	private long lastActivityMillis = System.currentTimeMillis();
 	
-	
 	// This is a foreign key
 	// Each player may be married to one other player
 	// Null is default (No marriage partner)
 	private String partnerId = null;
 
+	// This is a foreign key
 	// This will hold the player that MPlayer has
 	// 	  sent a proposal to.
 	// Default is null.

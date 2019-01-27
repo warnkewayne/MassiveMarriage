@@ -51,7 +51,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		if ( event.isCancelled() ) return;
 		
 		// Inform Player
-		msender.msg("You have denied the proposal from %s<i>.", mplayer.getName());
+		msender.msg("<i>You have denied the proposal from <white>%s.", mplayer.getName());
 		mplayer.msg("%s<i> has denied your proposal.", sender.getName());
 		
 		// Apply

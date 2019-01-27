@@ -92,7 +92,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				mplayer.message(mson);
 				
 				// Inform Sender
-				msg("<i>You have proposed to " + mplayer.getName() + ".");
+				msg("<i>You have proposed to <white>" + mplayer.getName() + ".");
 				
 				// Apply
 				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);

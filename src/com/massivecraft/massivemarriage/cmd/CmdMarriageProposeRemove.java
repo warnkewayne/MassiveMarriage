@@ -43,11 +43,11 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 			if (event.isCancelled()) return;
 
 			// Check if sent name matches with proposed player.
-			if ( ! (msender.getPartnerId() == IdUtil.getId(mplayer)) ) throw new MassiveException().addMsg("<b>You did not propose to them.");
+			if ( ! ( msender.getProposedPlayerId().equals(IdUtil.getId(mplayer)) ) ) throw new MassiveException().addMsg("<b>You did not propose to them.");
 			
 			// Inform Player
 			mplayer.msg("%s<i> has cancelled their proposal.", msender.getName());
-			msender.msg("You have cancelled your proposal to %s<i>", mplayer.getName());
+			msender.msg("<i>You have cancelled your proposal to <white>%s", mplayer.getName());
 			
 			// Apply
 			msender.setProposedPlayerId(null);

@@ -67,7 +67,7 @@ public class MConf extends Entity<MConf>
 	// and the block radius where the boosts are in effect.
 	
 	public boolean enableXpBoost = true;
-	public double xpBoostPct = .3;
+	public double xpBoostFactor = .3; // if value is .3, xp boosted 30%
 	public double xpBlockRadius = 30;
 	
 	// -------------------------------------------- //

@@ -60,7 +60,7 @@ public class EngineXPBoost extends Engine
 		
 		// ... then boost the xp
 		int vanillaXP = event.getAmount();
-		double boost = MConf.get().xpBoostPct;
+		double boost = MConf.get().xpBoostFactor;
 		
 		double addOn = vanillaXP * boost;
 		

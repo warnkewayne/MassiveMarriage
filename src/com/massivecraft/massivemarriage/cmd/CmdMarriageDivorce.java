@@ -34,7 +34,7 @@ public class CmdMarriageDivorce extends MarriageCommand
 	public void perform() throws MassiveException
 	{
 		// Check if sender is married
-		if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are not married.");
+		if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are not married!");
 		
 		// Get msender info
 		String partnerId = msender.getPartnerId();
@@ -47,8 +47,8 @@ public class CmdMarriageDivorce extends MarriageCommand
 		if ( statusChangeEvent.isCancelled() ) return;
 		
 		// Inform
-		partner.msg("%s<i> has divorced you.", msender.getName()); //.color(ChatColor.YELLOW);
-		msender.msg("You have divorced %s<i>.", partner.getName()); //.color(ChatColor.YELLOW);
+		partner.msg("%s<i> has divorced you.", msender.getName());
+		msender.msg("<i>You have divorced <white>%s.", partner.getName());
 		
 		// Apply
 		partner.resetMarriageData();
