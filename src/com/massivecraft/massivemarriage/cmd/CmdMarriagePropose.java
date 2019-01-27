@@ -11,7 +11,6 @@ import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 
 import com.massivecraft.massivecore.MassiveException;
-import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.IdUtil;
 
@@ -19,10 +18,6 @@ import com.massivecraft.massivecore.util.IdUtil;
 import org.bukkit.ChatColor;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import static com.massivecraft.massivecore.mson.Mson.mson;
-
 
 public class CmdMarriagePropose extends MarriageCommand
 {
@@ -54,22 +49,25 @@ public class CmdMarriagePropose extends MarriageCommand
 		MPlayer sendingPlayer = MPlayer.get(senderId);
 		long creationMillis = System.currentTimeMillis();
 		
+			// Check if player isn't ignoring the sender
+			if (mplayer.isAcknowledging(sender)) throw new MassiveException().addMsg("<b>Sorry, you cannot propose to this player.");
+		
 			// Sender sending to themselves?
 			if( senderId.equals(mplayerId) )
 			{
-				throw new MassiveException().addMsg("You cannot marry yourself!"); //.color(ChatColor.RED);
+				throw new MassiveException().addMsg("<b>You cannot marry yourself!");
 			}
 			
 			// Sender is already married?
 			if ( sendingPlayer.getPartnerId() != null )
 			{
-				throw new MassiveException().addMsg("You are already married!"); //.color(ChatColor.RED);
+				throw new MassiveException().addMsg("<b>You are already married!");
 			}
 		
 			// Player is already married?
 			if ( mplayer.getPartnerId() != null )
 			{
-				throw new MassiveException().addMsg(mplayer.getName() + " is already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
+				throw new MassiveException().addMsg(mplayer.getName() + " <b>is already married. Don't be a homewrecker!");
 			}
 			
 			// Already proposed?
@@ -85,7 +83,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				String deny = CmdMarriage.get().cmdMarriageDenyProposal.getCommandLine(msender.getName());
 				
 				Mson mson = Mson.mson(
-					mson(sendingPlayer.getName() + " has proposed to you!"),
+					mson(sendingPlayer.getName() + " <i>has proposed to you!"),
 					mson(" <Accept> ").color(ChatColor.GREEN).suggest(accept),
 					mson(" <Deny>").color(ChatColor.RED).suggest(deny)
 				);
@@ -94,7 +92,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				mplayer.message(mson);
 				
 				// Inform Sender
-				msg("You have proposed to " + mplayer.getName() + "."); //.color(ChatColor.YELLOW);
+				msg("<i>You have proposed to " + mplayer.getName() + ".");
 				
 				// Apply
 				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);

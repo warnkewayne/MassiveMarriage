@@ -2,7 +2,6 @@ package com.massivecraft.massivemarriage.engine;
 
 
 import com.massivecraft.massivemarriage.entity.MConf;
-import com.massivecraft.massivemarriage.entity.MPlayerColl;
 import com.massivecraft.massivemarriage.entity.MPlayer;
 
 import com.massivecraft.massivecore.Engine;
@@ -12,12 +11,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.entity.Player;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.inventory.ItemStack;
-
 import java.util.HashMap;
 
 public class EngineKissPartner extends Engine

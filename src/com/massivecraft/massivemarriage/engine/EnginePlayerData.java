@@ -27,15 +27,15 @@ public class EnginePlayerData extends Engine
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerKick(PlayerKickEvent event)
 	{
-		// If a player was kicked from the server ...
+		// If we remove player data when banned ...
+		if ( ! MConf.get().removePlayerWhenBanned ) return;
+		
+		// ...and a player was kicked from the server ...
 		Player player = event.getPlayer();
 
 		// ... and if the if player was banned (not just kicked) ...
 		//if (!event.getReason().equals("Banned by admin.")) return;
 		if ( ! player.isBanned() ) return;
-
-		// ... and we remove player data when banned ...
-		if ( ! MConf.get().removePlayerWhenBanned ) return;
 		
 		// ... get rid of their stored info.
 		MPlayer mplayer = MPlayerColl.get().get(player, false);
@@ -51,7 +51,7 @@ public class EnginePlayerData extends Engine
 			partner.resetMarriageData();
 			
 			// ... inform the partner
-			partner.msg("Your partner has been banned. You are now single and ready to mingle!");
+			partner.msg("<i>Your partner has been banned. You are now single and ready to mingle!");
 		}
 
 		mplayer.resetMarriageData();

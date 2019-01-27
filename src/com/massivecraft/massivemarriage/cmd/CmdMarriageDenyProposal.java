@@ -10,9 +10,6 @@ import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.util.IdUtil;
-import com.massivecraft.massivecore.util.Txt;
-
-import org.bukkit.ChatColor;
 
 import java.util.List;
 
@@ -45,7 +42,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		String mpPpId = mplayer.getProposedPlayerId();
 		
 		if ( mpPpId == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
-		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
+		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		
 		// Event
 		EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, true);

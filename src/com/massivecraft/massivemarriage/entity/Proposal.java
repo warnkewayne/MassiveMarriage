@@ -46,18 +46,4 @@ public class Proposal extends EntityInternal<Proposal>
 		this.receiverId = receiverId;
 		this.creationMillis = creationMillis;
 	}
-	
-	// -------------------------------------------- //
-	// DESTRUCT
-	// -------------------------------------------- //
-	
-	protected void finalize() throws Throwable
-	{
-		setCreationMillis(null);
-		setReceiverId(null);
-		setInviterId(null);
-		
-		super.finalize();
-	}
-	
 }

@@ -1,7 +1,6 @@
 package com.massivecraft.massivemarriage.event;
 
 import com.massivecraft.massivemarriage.entity.MPlayer;
-import com.massivecraft.massivemarriage.entity.Proposal;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.HandlerList;
 

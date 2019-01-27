@@ -48,17 +48,17 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 		// Check Player has proposal request
 		// Does mplayer have pending proposal?
-		if ( mplayer.getProposedPlayerId() != null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
+		if ( mplayer.getProposedPlayerId() != null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 	
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
-		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!"); //.color(ChatColor.RED);
+		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 			
 		// Check Player is married
-		if ( mplayer.getPartnerId() != null ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!"); //.color(ChatColor.RED);
+		if ( mplayer.getPartnerId() != null ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!");
 		
 		// Check if Sender is married
-		if ( msender.getPartnerId() != null ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal."); //.color(ChatColor.RED);
+		if ( msender.getPartnerId() != null ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
 		
 		// Marriage Costs Regals
 		if ( MConf.get().marriageCostRegals )
@@ -88,12 +88,12 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 				// Charge the two players regals
 				if (! Money.despawn(mplayer, mplayer, marriageCost, "MassiveMarriage") )
 				{
-					throw new MassiveException().addMsg("<b>Failed to remove money."); //.color(ChatColor.RED);
+					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 				
 				if (! Money.despawn(msender, msender, marriageCost, "MassiveMarriage") )
 				{
-					throw new MassiveException().addMsg("<b>Failed to remove money."); //.color(ChatColor.RED);
+					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 			}
 		}

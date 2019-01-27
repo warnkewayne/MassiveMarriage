@@ -10,9 +10,6 @@ import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 import com.massivecraft.massivecore.MassiveException;
 
-import org.bukkit.ChatColor;
-import org.checkerframework.checker.units.qual.Mass;
-
 import java.util.List;
 
 public class CmdMarriageProposeRemove extends MarriageCommand

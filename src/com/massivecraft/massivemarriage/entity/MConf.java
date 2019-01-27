@@ -9,9 +9,6 @@ import com.massivecraft.massivecore.store.Entity;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.TimeUnit;
 
-import org.bukkit.entity.Player;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +86,6 @@ public class MConf extends Entity<MConf>
 		"YELLOW_FLOWER",
 		"DEAD_BUSH"
 		);
-	
 	
 	// -------------------------------------------- //
 	// BROADCAST MARRIAGES
