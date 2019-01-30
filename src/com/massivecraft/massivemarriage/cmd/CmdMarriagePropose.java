@@ -83,7 +83,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				String deny = CmdMarriage.get().cmdMarriageDenyProposal.getCommandLine(msender.getName());
 				
 				Mson mson = Mson.mson(
-					mson(sendingPlayer.getName() + " <i>has proposed to you!"),
+					mson(sendingPlayer.getName() + " has proposed to you!").color(ChatColor.YELLOW),
 					mson(" <Accept> ").color(ChatColor.GREEN).suggest(accept),
 					mson(" <Deny>").color(ChatColor.RED).suggest(deny)
 				);

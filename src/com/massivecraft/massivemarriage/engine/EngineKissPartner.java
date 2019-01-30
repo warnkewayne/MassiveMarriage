@@ -70,9 +70,9 @@ public class EngineKissPartner extends Engine
 	}
 	
 	// Handles Message Sending Cooldown in EngineKissPartner
-	public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
+	private HashMap<String, Long> cooldowns = new HashMap<>();
 	
-	public boolean checkCooldown(Player player)
+	private boolean checkCooldown(Player player)
 	{
 		int cooldowntime = 60; // number of seconds
 		

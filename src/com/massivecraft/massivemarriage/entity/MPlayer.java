@@ -39,7 +39,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// Each player may be married to one other player
 	// Null is default (No marriage partner)
 	private String partnerId = null;
-
+	
 	// This is a foreign key
 	// This will hold the player that MPlayer has
 	// 	  sent a proposal to.
@@ -91,14 +91,11 @@ public class MPlayer extends SenderEntity<MPlayer>
 		// Before
 		String beforeId = this.partnerId;
 		
-		// After
-		String afterId = partnerId;
-		
 		// NoChange
-		if (MUtil.equals(beforeId, afterId)) return;
+		if (MUtil.equals(beforeId, partnerId)) return;
 		
 		// Apply
-		this.partnerId = afterId;
+		this.partnerId = partnerId;
 		
 		// Mark as changed
 		this.changed();
@@ -109,10 +106,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	{
 		String mPlayerId = IdUtil.getId(mPlayer);
 		
-		if(this.partnerId.equals(mPlayerId)) return true;
-		
-		
-		return false;
+		return this.partnerId.equals(mPlayerId);
 	}
 
 	// -------------------------------------------- //

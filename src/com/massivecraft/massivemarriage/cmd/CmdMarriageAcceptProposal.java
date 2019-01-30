@@ -16,7 +16,6 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.money.Money;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.List;
@@ -145,7 +144,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 	// CHECK UTILITIES
 	// -------------------------------------------- //
 	
-	public void sendCheckFailMessage(MPlayer mplayer, String resourceName, Object required, Object possessed, Object missing)
+	private void sendCheckFailMessage(MPlayer mplayer, String resourceName, Object required, Object possessed, Object missing)
 	{
 		String notEnoughMessage = String.format("<b>Not enough <h>%s<b>.", resourceName);
 		mplayer.message(notEnoughMessage);

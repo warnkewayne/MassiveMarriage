@@ -32,7 +32,7 @@ public class EngineCleanInactivity extends Engine
 		applyPlayerAgeBonus(event);
 	}
 	
-	public void applyPlayerAgeBonus(EventMassiveCorePlayerCleanInactivityToleranceMillis event)
+	private void applyPlayerAgeBonus(EventMassiveCorePlayerCleanInactivityToleranceMillis event)
 	{
 		// Calculate First played
 		Long firstPlayed = event.getEntity().getFirstPlayed();

@@ -5,7 +5,6 @@ import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivemarriage.entity.MPlayer;
-import org.bukkit.ChatColor;
 
 import java.util.List;
 
