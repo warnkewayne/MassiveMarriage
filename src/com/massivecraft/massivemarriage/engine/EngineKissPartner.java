@@ -55,10 +55,13 @@ public class EngineKissPartner extends Engine
 		
 		// ... then get location of player ...
 		Location playerLocation = player.getEyeLocation();
+		Location partnerLocation = cPlayer.getEyeLocation();
 		World playerWorld = player.getWorld();
+		World partnerWorld = cPlayer.getWorld();
 		
 		// ... then send kisses <3 <3 <3 ...
 		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1);
+		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1);
 		
 		// ... check cooldown ...
 		if( checkCooldown(player) ) { event.setCancelled(true); return; }

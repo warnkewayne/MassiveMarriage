@@ -16,6 +16,7 @@ permissions:
   massivemarriage.accept:       {description: accept a proposal from another player, default: false}
   massivemarriage.deny:         {description: deny a proposal from another player, default: false}
   massivemarriage.show:         {description: show your current partner, default: false}
+  massivemarriage.show.other:   {description: see other players' partner, default: false}
   massivemarriage.divorce:      {description: divorce your current partner, default: false}
   massivemarriage.config:       {description: edit the MassiveMarriage config, default: false}
   massivemarriage.version:      {description: display MassiveMarriage version, default: false}
@@ -31,6 +32,7 @@ permissions:
       massivemarriage.accept: true
       massivemarriage.deny: true
       massivemarriage.show: true
+      massivemarriage.show.other: true
       massivemarriage.divorce: true
       massivemarriage.config: true
       massivemarriage.version: true
@@ -64,6 +66,7 @@ permissions:
       massivemarriage.accept: true
       massivemarriage.deny: true
       massivemarriage.show: true
+      massivemarriage.show.other: true
       massivemarriage.divorce: true
   massivemarriage.kit.default:
     default: true

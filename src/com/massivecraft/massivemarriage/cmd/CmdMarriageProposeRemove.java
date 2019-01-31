@@ -19,8 +19,6 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	// -------------------------------------------- //
 	public CmdMarriageProposeRemove()
 	{
-		this.addParameter(TypeMPlayer.get());
-		
 		this.addRequirements(RequirementHasPerm.get(Perm.UNPROPOSE));
 	}
 	
@@ -31,23 +29,20 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	@Override
 	public void perform() throws MassiveException
 	{
-		MPlayer mplayer = this.readArg();
-		
 		// Check if player has pending proposal
-		if ( mplayer.getProposedPlayerId() != null )
+		if ( msender.getProposedPlayerId() != null )
 		{
+			MPlayer proposedPlayer = MPlayer.get(msender.getProposedPlayerId());
+			
 			// Event
-			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, true);
+			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, proposedPlayer, true);
 			event.run();
 			
 			if (event.isCancelled()) return;
-
-			// Check if sent name matches with proposed player.
-			if ( ! ( msender.getProposedPlayerId().equals(IdUtil.getId(mplayer)) ) ) throw new MassiveException().addMsg("<b>You did not propose to them.");
 			
 			// Inform Player
-			mplayer.msg("%s<i> has cancelled their proposal.", msender.getName());
-			msender.msg("<i>You have cancelled your proposal to <white>%s", mplayer.getName());
+			proposedPlayer.msg("%s<i> has cancelled their proposal.", msender.getName());
+			msender.msg("<i>You have cancelled your proposal to <white>%s", proposedPlayer.getName());
 			
 			// Apply
 			msender.setProposedPlayerId(null);

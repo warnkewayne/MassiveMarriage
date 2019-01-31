@@ -51,6 +51,9 @@ public class CmdMarriagePropose extends MarriageCommand
 		
 			// Check if player isn't ignoring the sender
 			if ( ! mplayer.isAcknowledging(sender) ) throw new MassiveException().addMsg("<b>Sorry, you cannot propose to this player.");
+			
+			// Check if player is online
+			if ( mplayer.isOffline() ) throw new MassiveException().addMsg("<b>Sorry, the player must be online to be proposed to.");
 		
 			// Sender sending to themselves?
 			if( senderId.equals(mplayerId) )

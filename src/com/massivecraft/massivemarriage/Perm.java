@@ -24,6 +24,8 @@ public enum Perm implements Identified
 	
 	SHOW,
 	
+	SHOW_OTHER,
+	
 	CONFIG,
 	
 	VERSION,

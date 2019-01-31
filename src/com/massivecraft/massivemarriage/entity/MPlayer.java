@@ -1,5 +1,6 @@
 package com.massivecraft.massivemarriage.entity;
 
+import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.store.SenderEntity;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.IdUtil;
@@ -22,6 +23,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 		this.setLastActivityMillis(that.lastActivityMillis);
 		this.setPartnerId(that.partnerId);
 		this.setProposedPlayerId(that.proposedPlayerId);
+		this.setSuitors(that.suitors);
 		
 		return this;
 	}
@@ -46,6 +48,12 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// Default is null.
 	private String proposedPlayerId = null;
 	
+	// This is a set of playerIds that proposed to
+	// MPlayer.
+	// Default is set to empty.
+	protected MassiveSet<String> suitors;
+	
+	
 
 	// -------------------------------------------- //
 	// CORE UTILITIES
@@ -53,8 +61,8 @@ public class MPlayer extends SenderEntity<MPlayer>
 	
 	public void resetMarriageData()
 	{
-		this.partnerId = null;
-		this.proposedPlayerId = null;
+		setPartnerId(null);
+		setProposedPlayerId(null);
 	}
 	
 	// -------------------------------------------- //
@@ -106,6 +114,8 @@ public class MPlayer extends SenderEntity<MPlayer>
 	{
 		String mPlayerId = IdUtil.getId(mPlayer);
 		
+		if ( this.partnerId == null ) return false;
+		
 		return this.partnerId.equals(mPlayerId);
 	}
 
@@ -115,6 +125,10 @@ public class MPlayer extends SenderEntity<MPlayer>
 	public String getProposedPlayerId() { return this.proposedPlayerId; }
 
 	public void setProposedPlayerId(String proposedPlayerId) { this.proposedPlayerId = proposedPlayerId; }
-
 	
+	// -------------------------------------------- //
+	// FIELD: suitors
+	// -------------------------------------------- //
+	
+	public void setSuitors(MassiveSet suitors) { this.suitors = suitors; }
 }
