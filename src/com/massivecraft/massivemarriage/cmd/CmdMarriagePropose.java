@@ -46,7 +46,6 @@ public class CmdMarriagePropose extends MarriageCommand
 		String mplayerId = IdUtil.getId(mplayer);
 		
 		String senderId = IdUtil.getId(sender);
-		MPlayer sendingPlayer = MPlayer.get(senderId);
 		long creationMillis = System.currentTimeMillis();
 		
 			// Check if player isn't ignoring the sender
@@ -62,7 +61,7 @@ public class CmdMarriagePropose extends MarriageCommand
 			}
 			
 			// Sender is already married?
-			if ( sendingPlayer.hasPartner() )
+			if ( msender.hasPartner() )
 			{
 				throw new MassiveException().addMsg("<b>You are already married!");
 			}
@@ -74,7 +73,7 @@ public class CmdMarriagePropose extends MarriageCommand
 			}
 			
 			// Already proposed?
-			if ( sendingPlayer.getProposedPlayerId() == null )
+			if ( msender.getProposedPlayerId() == null )
 			{
 				// Event
 				EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, false);
@@ -86,7 +85,7 @@ public class CmdMarriagePropose extends MarriageCommand
 				String deny = CmdMarriage.get().cmdMarriageDenyProposal.getCommandLine(msender.getName());
 				
 				Mson mson = Mson.mson(
-					mson(sendingPlayer.getName() + " has proposed to you!").color(ChatColor.YELLOW),
+					mson(msender.getName() + " has proposed to you!").color(ChatColor.YELLOW),
 					mson(" <Accept> ").color(ChatColor.GREEN).suggest(accept),
 					mson(" <Deny>").color(ChatColor.RED).suggest(deny)
 				);
@@ -95,14 +94,14 @@ public class CmdMarriagePropose extends MarriageCommand
 				mplayer.message(mson);
 				
 				// Store
-				mplayer.addToSuitors(sendingPlayer.getId());
+				mplayer.addToSuitors(senderId);
 				
 				// Inform Sender
 				msg("<i>You have proposed to <white>" + mplayer.getName() + ".");
 				
 				// Apply
 				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);
-				sendingPlayer.setProposedPlayerId(mplayerId);
+				msender.setProposedPlayerId(mplayerId);
 			}
 			else
 			{

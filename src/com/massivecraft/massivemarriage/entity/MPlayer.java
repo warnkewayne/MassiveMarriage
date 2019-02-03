@@ -5,6 +5,8 @@ import com.massivecraft.massivecore.store.SenderEntity;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.IdUtil;
 
+import java.util.Iterator;
+
 public class MPlayer extends SenderEntity<MPlayer>
 {
 	// -------------------------------------------- //
@@ -125,14 +127,14 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// -------------------------------------------- //
 	public String getProposedPlayerId() { return this.proposedPlayerId; }
 
-	public void setProposedPlayerId(String proposedPlayerId) { this.proposedPlayerId = proposedPlayerId; }
+	public void setProposedPlayerId(String proposedPlayerId) { this.proposedPlayerId = proposedPlayerId; this.changed(); }
 	
 	// -------------------------------------------- //
 	// FIELD: suitors
 	// -------------------------------------------- //
-	public void addToSuitors(String playerId) { suitors.add(playerId); }
+	public void addToSuitors(String playerId) { suitors.add(playerId); this.changed(); }
 	
-	public void removeFromSuitors(String playerId) { suitors.remove(playerId); }
+	public void removeFromSuitors(String playerId) { suitors.remove(playerId); this.changed(); }
 	
 	public boolean isSuitor(String playerId) { return suitors.contains(playerId); }
 	
@@ -141,4 +143,6 @@ public class MPlayer extends SenderEntity<MPlayer>
 	public void setSuitors(MassiveSet suitors) { this.suitors = suitors; this.changed(); }
 	
 	public void emptySuitors() { this.suitors.clear(); this.changed(); }
+	
+	public boolean hasSuitors() { return ! (this.suitors.isEmpty()); }
 }

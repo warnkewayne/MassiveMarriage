@@ -1,5 +1,6 @@
 package com.massivecraft.massivemarriage.cmd;
 
+import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.Perm;
@@ -35,7 +36,22 @@ public class CmdMarriageShow extends MarriageCommand
 		
 		if( mPlayerId.equals(msender.getId()) )
 		{
-			if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<i>You are single and ready to mingle!");
+			if( ! msender.hasPartner() )
+			{
+				msg("<i>You are single and ready to mingle!");
+				
+				if ( msender.hasSuitors() )
+				{
+					// Print suitors
+					msg("<gold>Proposed to You: <white>%s", msender.getSuitors());
+				}
+				if ( msender.getProposedPlayerId() != null )
+				{
+					// Print proposed player id
+					msg("<gold>Proposals Pending: <white>%s", msender.getProposedPlayerId());
+				}
+				return;
+			}
 			
 			String partnerId = msender.getPartnerId();
 			MPlayer partner = MPlayer.get(partnerId);
