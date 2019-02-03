@@ -74,7 +74,7 @@ public class CmdMarriagePropose extends MarriageCommand
 			}
 			
 			// Already proposed?
-			if ( mplayer.getProposedPlayerId() == null )
+			if ( sendingPlayer.getProposedPlayerId() == null )
 			{
 				// Event
 				EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, false);
@@ -94,6 +94,9 @@ public class CmdMarriagePropose extends MarriageCommand
 				// Inform MPlayer
 				mplayer.message(mson);
 				
+				// Store
+				mplayer.addToSuitors(sendingPlayer.getId());
+				
 				// Inform Sender
 				msg("<i>You have proposed to <white>" + mplayer.getName() + ".");
 				
@@ -101,11 +104,10 @@ public class CmdMarriagePropose extends MarriageCommand
 				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);
 				sendingPlayer.setProposedPlayerId(mplayerId);
 			}
-			
 			else
 			{
 				// Mson
-				String command = CmdMarriage.get().cmdMarriageProposeRemove.getCommandLine(mplayer.getName());
+				String command = CmdMarriage.get().cmdMarriageProposeRemove.getCommandLine();
 				
 				Mson remove = mson(
 					mson("You already have a pending proposal.").color(ChatColor.YELLOW),

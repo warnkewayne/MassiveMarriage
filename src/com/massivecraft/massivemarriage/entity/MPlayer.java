@@ -51,7 +51,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// This is a set of playerIds that proposed to
 	// MPlayer.
 	// Default is set to empty.
-	protected MassiveSet<String> suitors;
+	private MassiveSet<String> suitors = new MassiveSet<>();
 	
 	
 
@@ -63,6 +63,7 @@ public class MPlayer extends SenderEntity<MPlayer>
 	{
 		setPartnerId(null);
 		setProposedPlayerId(null);
+		emptySuitors();
 	}
 	
 	// -------------------------------------------- //
@@ -129,6 +130,15 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// -------------------------------------------- //
 	// FIELD: suitors
 	// -------------------------------------------- //
+	public void addToSuitors(String playerId) { suitors.add(playerId); }
 	
-	public void setSuitors(MassiveSet suitors) { this.suitors = suitors; }
+	public void removeFromSuitors(String playerId) { suitors.remove(playerId); }
+	
+	public boolean isSuitor(String playerId) { return suitors.contains(playerId); }
+	
+	public MassiveSet<String> getSuitors() { return suitors; }
+	
+	public void setSuitors(MassiveSet suitors) { this.suitors = suitors; this.changed(); }
+	
+	public void emptySuitors() { this.suitors.clear(); this.changed(); }
 }

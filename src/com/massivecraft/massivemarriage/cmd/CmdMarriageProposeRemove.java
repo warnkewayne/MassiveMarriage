@@ -46,6 +46,7 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 			
 			// Apply
 			msender.setProposedPlayerId(null);
+			proposedPlayer.removeFromSuitors(msender.getId());
 		}
 		else
 		{

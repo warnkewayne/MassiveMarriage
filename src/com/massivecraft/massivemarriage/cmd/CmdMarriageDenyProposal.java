@@ -56,6 +56,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		
 		// Apply
 		mplayer.setProposedPlayerId(null);
+		msender.removeFromSuitors(mplayer.getId());
 		
 	}
 

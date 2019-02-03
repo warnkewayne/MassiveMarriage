@@ -40,7 +40,7 @@ public class CmdMarriageShow extends MarriageCommand
 			String partnerId = msender.getPartnerId();
 			MPlayer partner = MPlayer.get(partnerId);
 			
-			message("<i>You are currently married to <aqua>" + partner.getName());
+			msg("<i>You are currently married to <aqua>" + partner.getName());
 			return;
 		}
 		
@@ -51,7 +51,7 @@ public class CmdMarriageShow extends MarriageCommand
 		String partnerId = mPlayer.getPartnerId();
 		MPlayer partner = MPlayer.get(partnerId);
 		
-		message(mPlayer.getName() + "<i> and <white>%s <i>are married.", partner.getName());
+		msg(mPlayer.getName() + "<i> and <white>%s <i>are married.", partner.getName());
 	}
 	
 	@Override
