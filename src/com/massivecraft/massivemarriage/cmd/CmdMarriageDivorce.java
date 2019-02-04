@@ -1,6 +1,7 @@
 package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivemarriage.MassiveMarriage;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
@@ -47,8 +48,8 @@ public class CmdMarriageDivorce extends MarriageCommand
 		if ( statusChangeEvent.isCancelled() ) return;
 		
 		// Inform
-		partner.msg("%s<i> has divorced you.", msender.getName());
-		msender.msg("<i>You have divorced <white>%s.", partner.getName());
+		partner.msg("%s<i> has divorced you.", MixinDisplayName.get().getDisplayName(msender, partner));
+		msender.msg("<i>You have divorced <white>%s.", MixinDisplayName.get().getDisplayName(partner, msender));
 		
 		// Apply
 		partner.resetMarriageData();
@@ -67,5 +68,5 @@ public class CmdMarriageDivorce extends MarriageCommand
 		// -------------------------------------------- //
 		
 		@Override
-		public List<String> getAliases() { return MConf.get().getAliasesMarriageDivorce; }
+		public List<String> getAliases() { return MConf.get().aliasesMarriageDivorce; }
 }

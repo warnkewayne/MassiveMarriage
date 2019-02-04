@@ -5,8 +5,6 @@ import com.massivecraft.massivecore.store.SenderEntity;
 import com.massivecraft.massivecore.util.MUtil;
 import com.massivecraft.massivecore.util.IdUtil;
 
-import java.util.Iterator;
-
 public class MPlayer extends SenderEntity<MPlayer>
 {
 	// -------------------------------------------- //
@@ -22,10 +20,10 @@ public class MPlayer extends SenderEntity<MPlayer>
 	@Override
 	public MPlayer load(MPlayer that)
 	{
-		this.setLastActivityMillis(that.lastActivityMillis);
-		this.setPartnerId(that.partnerId);
-		this.setProposedPlayerId(that.proposedPlayerId);
-		this.setSuitors(that.suitors);
+		this.lastActivityMillis = that.lastActivityMillis;
+		this.partnerId = that.partnerId;
+		this.proposedPlayerId = that.proposedPlayerId;
+		this.suitors = that.suitors;
 		
 		return this;
 	}
@@ -90,8 +88,6 @@ public class MPlayer extends SenderEntity<MPlayer>
 	
 	public String getPartnerId() { return this.partnerId; }
 
-	//TODO: getPartner() accepts different datatypes
-	
 	public boolean hasPartner()
 	{
 		return this.getPartnerId() != null;
@@ -140,9 +136,21 @@ public class MPlayer extends SenderEntity<MPlayer>
 	
 	public MassiveSet<String> getSuitors() { return suitors; }
 	
-	public void setSuitors(MassiveSet suitors) { this.suitors = suitors; this.changed(); }
+	public void setSuitors(MassiveSet<String> suitors) { this.suitors = suitors; this.changed(); }
 	
-	public void emptySuitors() { this.suitors.clear(); this.changed(); }
+	public void emptySuitors()
+	{
+		MassiveSet<String> suitors = this.getSuitors();
+		
+		for (String ms: suitors)
+		{
+			MPlayer.get(ms).setProposedPlayerId(null);
+		}
+		
+		suitors.clear();
+		
+		this.changed();
+	}
 	
 	public boolean hasSuitors() { return ! (this.suitors.isEmpty()); }
 }

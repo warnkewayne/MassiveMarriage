@@ -12,7 +12,7 @@ permissions:
 # -------------------------------------------- #
   massivemarriage.basecommand:  {description: use the MassiveMarriage base command, default: false}
   massivemarriage.propose:      {description: send a proposal to another player, default: false}
-  massivemarriage.unpropose:    {description: cancel a proposal sent, default: false}
+  massivemarriage.unpropose:    {description: cancel your current proposal, default: false}
   massivemarriage.accept:       {description: accept a proposal from another player, default: false}
   massivemarriage.deny:         {description: deny a proposal from another player, default: false}
   massivemarriage.show:         {description: show your current partner, default: false}

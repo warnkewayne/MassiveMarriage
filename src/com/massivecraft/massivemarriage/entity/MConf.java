@@ -102,12 +102,12 @@ public class MConf extends Entity<MConf>
 	// -------------------------------------------- //
 	
 	public List<String> aliasesMarriage = MUtil.list("marry");
-	public List<String> getAliasesMarriagePropose = MUtil.list("propose");
-	public List<String> getAliasesMarriageProposeRemove = MUtil.list("unpropose");
-	public List<String> getAliasesMarriageAcceptProposal = MUtil.list("accept");
-	public List<String> getAliasesMarriageDenyProposal = MUtil.list("deny");
-	public List<String> getAliasesMarriageShow = MUtil.list("show");
-	public List<String> getAliasesMarriageDivorce = MUtil.list("divorce");
+	public List<String> aliasesMarriagePropose = MUtil.list("propose");
+	public List<String> aliasesMarriageProposeRemove = MUtil.list("unpropose");
+	public List<String> aliasesMarriageAcceptProposal = MUtil.list("accept");
+	public List<String> aliasesMarriageDenyProposal = MUtil.list("deny");
+	public List<String> aliasesMarriageShow = MUtil.list("show");
+	public List<String> aliasesMarriageDivorce = MUtil.list("divorce");
 	public List<String> aliasesMarriageConfig = MUtil.list("config");
 	public List<String> aliasesMarriageVersion = MUtil.list("v", "version");
 }

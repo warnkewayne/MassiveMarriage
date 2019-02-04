@@ -2,6 +2,7 @@ package com.massivecraft.massivemarriage.cmd;
 
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
@@ -41,7 +42,6 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
 		
-		if ( mpPpId == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		
 		// Event
@@ -51,8 +51,8 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		if ( event.isCancelled() ) return;
 		
 		// Inform Player
-		msender.msg("<i>You have denied the proposal from <white>%s.", mplayer.getName());
-		mplayer.msg("%s<i> has denied your proposal.", sender.getName());
+		msender.msg("<i>You have denied the proposal from <white>%s.", MixinDisplayName.get().getDisplayName(mplayer, msender));
+		mplayer.msg("%s<i> has denied your proposal.", MixinDisplayName.get().getDisplayName(msender, mplayer));
 		
 		// Apply
 		mplayer.setProposedPlayerId(null);
@@ -61,5 +61,5 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 	}
 
 	@Override
-	public List<String> getAliases() { return MConf.get().getAliasesMarriageDenyProposal; }
+	public List<String> getAliases() { return MConf.get().aliasesMarriageDenyProposal; }
 }

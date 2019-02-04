@@ -2,11 +2,11 @@ package com.massivecraft.massivemarriage.cmd;
 
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
-import com.massivecraft.massivemarriage.entity.Proposal;
 import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 
@@ -44,10 +44,20 @@ public class CmdMarriagePropose extends MarriageCommand
 		// Arg
 		MPlayer mplayer = this.readArg();
 		String mplayerId = IdUtil.getId(mplayer);
-		
 		String senderId = IdUtil.getId(sender);
-		long creationMillis = System.currentTimeMillis();
 		
+			// Sender is already married?
+			if ( msender.hasPartner() ) { throw new MassiveException().addMsg("<b>You are already married!"); }
+		
+			// Player is already married?
+			if ( mplayer.hasPartner() )
+			{
+				throw new MassiveException().addMsg(
+					MixinDisplayName.get().getDisplayName(mplayer, msender)
+						+ " <b>is already married. Don't be a homewrecker!"
+				);
+			}
+			
 			// Check if player isn't ignoring the sender
 			if ( ! mplayer.isAcknowledging(sender) ) throw new MassiveException().addMsg("<b>Sorry, you cannot propose to this player.");
 			
@@ -55,22 +65,8 @@ public class CmdMarriagePropose extends MarriageCommand
 			if ( mplayer.isOffline() ) throw new MassiveException().addMsg("<b>Sorry, the player must be online to be proposed to.");
 		
 			// Sender sending to themselves?
-			if( senderId.equals(mplayerId) )
-			{
-				throw new MassiveException().addMsg("<b>You cannot marry yourself!");
-			}
+			if( senderId.equals(mplayerId) ) { throw new MassiveException().addMsg("<b>You cannot marry yourself!"); }
 			
-			// Sender is already married?
-			if ( msender.hasPartner() )
-			{
-				throw new MassiveException().addMsg("<b>You are already married!");
-			}
-		
-			// Player is already married?
-			if ( mplayer.hasPartner() )
-			{
-				throw new MassiveException().addMsg(mplayer.getName() + " <b>is already married. Don't be a homewrecker!");
-			}
 			
 			// Already proposed?
 			if ( msender.getProposedPlayerId() == null )
@@ -80,12 +76,15 @@ public class CmdMarriagePropose extends MarriageCommand
 				event.run();
 				if (event.isCancelled()) return;
 				
+				// Store
+				mplayer.addToSuitors(senderId); msender.setProposedPlayerId(mplayerId);
+				
 				// Mson
 				String accept = CmdMarriage.get().cmdMarriageAcceptProposal.getCommandLine(msender.getName());
 				String deny = CmdMarriage.get().cmdMarriageDenyProposal.getCommandLine(msender.getName());
 				
 				Mson mson = Mson.mson(
-					mson(msender.getName() + " has proposed to you!").color(ChatColor.YELLOW),
+					mson(MixinDisplayName.get().getDisplayName(msender, mplayer) + ChatColor.YELLOW + " has proposed to you!"),
 					mson(" <Accept> ").color(ChatColor.GREEN).suggest(accept),
 					mson(" <Deny>").color(ChatColor.RED).suggest(deny)
 				);
@@ -93,15 +92,8 @@ public class CmdMarriagePropose extends MarriageCommand
 				// Inform MPlayer
 				mplayer.message(mson);
 				
-				// Store
-				mplayer.addToSuitors(senderId);
-				
 				// Inform Sender
-				msg("<i>You have proposed to <white>" + mplayer.getName() + ".");
-				
-				// Apply
-				Proposal proposal = new Proposal(senderId, mplayerId, creationMillis);
-				msender.setProposedPlayerId(mplayerId);
+				msg("<i>You have proposed to " + MixinDisplayName.get().getDisplayName(mplayer, msender) + ".");
 			}
 			else
 			{
@@ -119,6 +111,6 @@ public class CmdMarriagePropose extends MarriageCommand
 	}
 	
 	@Override
-	public List<String> getAliases() { return MConf.get().getAliasesMarriagePropose; }
+	public List<String> getAliases() { return MConf.get().aliasesMarriagePropose; }
 	
 }

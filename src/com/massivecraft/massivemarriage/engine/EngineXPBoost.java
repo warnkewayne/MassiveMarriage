@@ -68,8 +68,6 @@ public class EngineXPBoost extends Engine
 		int addExp = (int)addOn;
 		
 		event.setAmount(addExp + vanillaXP);
-		mplayer.msg("Your XP was: " + vanillaXP);
-		mplayer.msg("Your XP is now: " + addExp);
 	}
 }
 

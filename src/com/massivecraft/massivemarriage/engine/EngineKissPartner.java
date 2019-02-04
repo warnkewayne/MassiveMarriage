@@ -1,6 +1,7 @@
 package com.massivecraft.massivemarriage.engine;
 
 
+import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
 
@@ -66,7 +67,7 @@ public class EngineKissPartner extends Engine
 		// ... check cooldown ...
 		if( checkCooldown(player) ) { event.setCancelled(true); return; }
 		// ... inform partner of that kiss
-		cMPlayer.msg("%s<i> has kissed you <red> <3", mplayer.getName());
+		cMPlayer.msg("%s<i> has kissed you<red> <3", MixinDisplayName.get().getDisplayName(mplayer, cMPlayer));
 		
 		// Cancel event to not interfere with MassiveBasic & Others
 		event.setCancelled(true);

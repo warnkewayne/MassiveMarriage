@@ -1,6 +1,7 @@
 package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
+import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivemarriage.MassiveMarriage;
@@ -87,13 +88,13 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 				// Charge the two players regals
 				if (! Money.despawn(mplayer, mplayer, marriageCost, "MassiveMarriage") )
 				{
-					msender.msg("<b>Failed to remove money from <white>s%", mplayer.getName());
+					msender.msg("<b>Failed to remove money from <white>s%", MixinDisplayName.get().getDisplayName(mplayer, msender));
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 				
 				if (! Money.despawn(msender, msender, marriageCost, "MassiveMarriage") )
 				{
-					mplayer.msg("<b>Money returned. Failed to remove money from <white>s%.", msender.getName());
+					mplayer.msg("<b>Money returned. Failed to remove money from <white>s%.", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					Money.spawn(mplayer, mplayer, marriageCost);
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
@@ -108,13 +109,15 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		// Apply
 		mplayer.setPartnerId(senderId);
 		mplayer.setProposedPlayerId(null);
+		mplayer.emptySuitors();
 		
 		msender.setPartnerId(mplayerId);
 		msender.setProposedPlayerId(null);
-
+		msender.emptySuitors();
+		
 		// Inform
-		mplayer.msg("<i>You and <white>%s<i> are now married!", msender.getName());
-		msender.msg("<i>You and <white>%s<i> are now married!", mplayer.getName());
+		mplayer.msg("<i>You and <white>%s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
+		msender.msg("<i>You and <white>%s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
 		
 		// Logging
 		if ( MConf.get().logMarriage )
@@ -139,9 +142,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 	}
 	
-	
 	// -------------------------------------------- //
-	// CHECK UTILITIES
+	// UTILITIES
 	// -------------------------------------------- //
 	
 	private void sendCheckFailMessage(MPlayer mplayer, String resourceName, Object required, Object possessed, Object missing)
@@ -152,11 +154,10 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		mplayer.message(reportMessage);
 	}
 	
-	
 	// -------------------------------------------- //
 	// COMMAND ALIASES
 	// -------------------------------------------- //
 	
 	@Override
-	public List<String> getAliases() { return MConf.get().getAliasesMarriageAcceptProposal; }
+	public List<String> getAliases() { return MConf.get().aliasesMarriageAcceptProposal; }
 }
