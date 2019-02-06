@@ -41,7 +41,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		// Check Player has proposal request
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
-		
+		if ( mpPpId == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		
 		// Event

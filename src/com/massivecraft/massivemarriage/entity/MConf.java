@@ -75,10 +75,12 @@ public class MConf extends Entity<MConf>
 	// -------------------------------------------- //
 	
 	// Here you can enable/disable players' ability to
-	// kiss their partners by right-clicking them while crouched
+	// kiss their partners by right-clicking them while holding the items within the set
+	// and config the cooldown for kisses.
 	
 	public boolean enableKisses = true;
 	
+	public int cooldownKisses = 60; //60 seconds
 	
 	// Set of flowers used in EngineKissPartner
 	public ExceptionSet flowers = new ExceptionSet(false,

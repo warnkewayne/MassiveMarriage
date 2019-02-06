@@ -40,15 +40,17 @@ public class EngineKissPartner extends Engine
 		final Player player = event.getPlayer();
 		final MPlayer mplayer = MPlayer.get(player);
 		
+		// If the player is sneaking return
+		if ( player.isSneaking() ) return;
+		
+		// If entity that is right click is a player...
 		if(! (event.getRightClicked() instanceof Player) ) return;
+		
 		final Player cPlayer = (Player)event.getRightClicked();
 		final MPlayer cMPlayer = MPlayer.get(cPlayer);
 		
 		// If the two players are married ...
 		if( ! mplayer.isPartner(cMPlayer) ) return;
-		
-		// ...and the player who clicked is sneaking ...
-		if ( ! player.isSneaking() ) return;
 		
 		// ...and the player has a flower in hand ...
 		Material inHand = player.getInventory().getItemInMainHand().getType();
@@ -78,12 +80,10 @@ public class EngineKissPartner extends Engine
 	
 	private boolean checkCooldown(Player player)
 	{
-		int cooldowntime = 60; // number of seconds
-		
 		if(cooldowns.containsKey(player.getName()))
 		{
 			//We divide the cooldown in milliseconds to seconds
-			long secondsLeft = ((cooldowns.get(player.getName())/1000)+cooldowntime) - (System.currentTimeMillis()/1000);
+			long secondsLeft = ((cooldowns.get(player.getName())/1000)+ MConf.get().cooldownKisses) - (System.currentTimeMillis()/1000);
 			
 			if( secondsLeft > 0 ) return true; // cooldown has time left
 		}

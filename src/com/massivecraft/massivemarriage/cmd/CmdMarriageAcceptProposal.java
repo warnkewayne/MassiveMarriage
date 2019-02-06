@@ -73,6 +73,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 					double moneyPossessed = Money.get(mplayer);
 					double moneyMissing = marriageCost - moneyPossessed;
 					this.sendCheckFailMessage(mplayer, "money", marriageCost, moneyPossessed, moneyMissing);
+					msender.msg("s% <b>did not have enough money to get married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
 					return;
 				}
 				
@@ -82,19 +83,20 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 					double moneyPossesed = Money.get(msender);
 					double moneyMissing = marriageCost - moneyPossesed;
 					this.sendCheckFailMessage(msender, "money", marriageCost, moneyPossesed, moneyMissing);
+					mplayer.msg("s% <b>did not have enough money to get married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					return;
 				}
 				
 				// Charge the two players regals
 				if (! Money.despawn(mplayer, mplayer, marriageCost, "MassiveMarriage") )
 				{
-					msender.msg("<b>Failed to remove money from <white>s%", MixinDisplayName.get().getDisplayName(mplayer, msender));
+					msender.msg("<b>Failed to remove money from s%", MixinDisplayName.get().getDisplayName(mplayer, msender));
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 				
 				if (! Money.despawn(msender, msender, marriageCost, "MassiveMarriage") )
 				{
-					mplayer.msg("<b>Money returned. Failed to remove money from <white>s%.", MixinDisplayName.get().getDisplayName(msender, mplayer));
+					mplayer.msg("<b>Money returned. Failed to remove money from s%.", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					Money.spawn(mplayer, mplayer, marriageCost);
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
@@ -116,8 +118,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		msender.emptySuitors();
 		
 		// Inform
-		mplayer.msg("<i>You and <white>%s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
-		msender.msg("<i>You and <white>%s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
+		mplayer.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
+		msender.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
 		
 		// Logging
 		if ( MConf.get().logMarriage )
@@ -148,10 +150,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 	
 	private void sendCheckFailMessage(MPlayer mplayer, String resourceName, Object required, Object possessed, Object missing)
 	{
-		String notEnoughMessage = String.format("<b>Not enough <h>%s<b>.", resourceName);
-		mplayer.message(notEnoughMessage);
-		String reportMessage = String.format("<k>Required: <v>%s <k>Possessed: <v>%s <k>Missing: <v>%s", required, possessed, missing);
-		mplayer.message(reportMessage);
+		mplayer.message("<b>Not enough <h>%s<b>.", resourceName);
+		mplayer.message("<k>Required: <v>%s <k>Possessed: <v>%s <k>Missing: <v>%s", required, possessed, missing);
 	}
 	
 	// -------------------------------------------- //
