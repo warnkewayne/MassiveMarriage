@@ -83,20 +83,20 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 					double moneyPossesed = Money.get(msender);
 					double moneyMissing = marriageCost - moneyPossesed;
 					this.sendCheckFailMessage(msender, "money", marriageCost, moneyPossesed, moneyMissing);
-					mplayer.msg("s% <b>did not have enough money to get married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
+					mplayer.msg("%s <b>did not have enough money to get married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					return;
 				}
 				
 				// Charge the two players regals
 				if (! Money.despawn(mplayer, mplayer, marriageCost, "MassiveMarriage") )
 				{
-					msender.msg("<b>Failed to remove money from s%", MixinDisplayName.get().getDisplayName(mplayer, msender));
+					msender.msg("<b>Failed to remove money from %s", MixinDisplayName.get().getDisplayName(mplayer, msender));
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
 				
 				if (! Money.despawn(msender, msender, marriageCost, "MassiveMarriage") )
 				{
-					mplayer.msg("<b>Money returned. Failed to remove money from s%.", MixinDisplayName.get().getDisplayName(msender, mplayer));
+					mplayer.msg("<b>Money returned. Failed to remove money from %s.", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					Money.spawn(mplayer, mplayer, marriageCost);
 					throw new MassiveException().addMsg("<b>Failed to remove money.");
 				}
