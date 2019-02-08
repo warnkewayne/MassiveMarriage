@@ -61,7 +61,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		if ( msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
 		
 		// Marriage Costs Regals
-		if ( MConf.get().marriageCostRegals )
+		if ( MConf.get().marriageCostAmount > 0 )
 		{
 			double marriageCost = MConf.get().marriageCostAmount;
 			
