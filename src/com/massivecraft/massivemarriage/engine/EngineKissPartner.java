@@ -29,7 +29,7 @@ public class EngineKissPartner extends Engine
 	// -------------------------------------------- //
 	// KISS
 	// -------------------------------------------- //
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL) 		//WorldGuard onPlayerInteraction() Listener is Priority HIGH
 	public void kissPartner(final PlayerInteractEntityEvent event)
 	{
 		// Check if event is cancelled, or feature is disabled.
@@ -62,12 +62,13 @@ public class EngineKissPartner extends Engine
 		World playerWorld = player.getWorld();
 		World partnerWorld = cPlayer.getWorld();
 		
+		// ... check cooldown ...
+		if( checkCooldown(player) ) { event.setCancelled(true); return; }
+		
 		// ... then send kisses <3 <3 <3 ...
 		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1);
 		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1);
 		
-		// ... check cooldown ...
-		if( checkCooldown(player) ) { event.setCancelled(true); return; }
 		// ... inform partner of that kiss
 		cMPlayer.msg("%s<i> has kissed you<red> <3", MixinDisplayName.get().getDisplayName(mplayer, cMPlayer));
 		

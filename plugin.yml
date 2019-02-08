@@ -15,7 +15,7 @@ permissions:
   massivemarriage.unpropose:    {description: cancel your current proposal, default: false}
   massivemarriage.accept:       {description: accept a proposal from another player, default: false}
   massivemarriage.deny:         {description: deny a proposal from another player, default: false}
-  massivemarriage.show:         {description: show your current partner, default: false}
+  massivemarriage.show:         {description: show marriage information, default: false}
   massivemarriage.show.other:   {description: see other players' partner, default: false}
   massivemarriage.divorce:      {description: divorce your current partner, default: false}
   massivemarriage.config:       {description: edit the MassiveMarriage config, default: false}

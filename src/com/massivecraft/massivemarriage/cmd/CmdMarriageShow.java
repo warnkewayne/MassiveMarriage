@@ -90,7 +90,7 @@ public class CmdMarriageShow extends MarriageCommand
 		// Player does not have permission to see other marriage info
 		if( ! Perm.SHOW_OTHER.has(sender, true) ) return;
 		
-		msg("<gold>__________.[<teal>MassiveMarriage<gold>].__________");
+		msg("<gold>_________.[<teal>MassiveMarriage<gold>].__________");
 		
 		if( ! mPlayer.hasPartner() ) throw new MassiveException().addMsg("%s <i>is single and ready to mingle!", MixinDisplayName.get().getDisplayName(mPlayer, msender));
 		
