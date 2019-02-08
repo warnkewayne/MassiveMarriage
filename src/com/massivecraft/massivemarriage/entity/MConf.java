@@ -55,7 +55,6 @@ public class MConf extends Entity<MConf>
 	// Here you can edit if marriages cost regals
 	// and how much it costs for EACH player.
 	
-	public boolean marriageCostRegals = true;
 	public double marriageCostAmount = 50;
 	
 	// -------------------------------------------- //
