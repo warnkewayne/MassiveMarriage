@@ -150,8 +150,11 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 	
 	private void sendCheckFailMessage(MPlayer mplayer, String resourceName, Object required, Object possessed, Object missing)
 	{
-		mplayer.message("<b>Not enough <h>%s<b>.", resourceName);
-		mplayer.message("<k>Required: <v>%s <k>Possessed: <v>%s <k>Missing: <v>%s", required, possessed, missing);
+		String notEnough = "<b>Not enough <h>%s<b>.";
+		String requirePossessMissing ="<k>Required: <v>%s <k>Possessed: <v>%s <k>Missing: <v>%s";
+		
+		mplayer.msg(notEnough, resourceName);
+		mplayer.msg(requirePossessMissing, required, possessed, missing);
 	}
 	
 	// -------------------------------------------- //
