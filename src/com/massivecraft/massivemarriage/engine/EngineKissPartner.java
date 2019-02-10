@@ -29,7 +29,7 @@ public class EngineKissPartner extends Engine
 	// -------------------------------------------- //
 	// KISS
 	// -------------------------------------------- //
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void kissPartner(final PlayerInteractEntityEvent event)
 	{
 		// Check if event is cancelled, or feature is disabled.
