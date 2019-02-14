@@ -38,7 +38,7 @@ public class EnginePlayerData extends Engine
 		if ( ! player.isBanned() ) return;
 		
 		// ... get rid of their stored info.
-		MPlayer mplayer = MPlayerColl.get().get(player, false);
+		MPlayer mplayer = MPlayer.get(player);
 		if ( mplayer == null ) return;
 		
 		// ... if banned player is married

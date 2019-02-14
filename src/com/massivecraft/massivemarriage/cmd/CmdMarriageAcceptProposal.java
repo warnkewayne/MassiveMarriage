@@ -109,13 +109,12 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		if ( statusChangeEvent.isCancelled() ) return;
 		
 		// Apply
+		mplayer.resetMarriageData();
 		mplayer.setPartnerId(senderId);
-		mplayer.setProposedPlayerId(null);
-		mplayer.emptySuitors();
 		
+		msender.resetMarriageData();
 		msender.setPartnerId(mplayerId);
-		msender.setProposedPlayerId(null);
-		msender.emptySuitors();
+
 		
 		// Inform
 		mplayer.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
