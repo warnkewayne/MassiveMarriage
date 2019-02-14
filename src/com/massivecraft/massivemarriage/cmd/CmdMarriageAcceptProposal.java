@@ -61,7 +61,7 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		if ( msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
 		
 		// Marriage Costs Regals
-		if ( MConf.get().marriageCostAmount > 0)
+		if ( MConf.get().marriageCostAmount > 0 )
 		{
 			double marriageCost = MConf.get().marriageCostAmount;
 			
@@ -80,9 +80,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 				// Check if sender has the money
 				if ( ! Money.has(msender, marriageCost) )
 				{
-					double moneyPossessed = Money.get(msender);
-					double moneyMissing = marriageCost - moneyPossessed;
-					this.sendCheckFailMessage(msender, "money", marriageCost, moneyPossessed, moneyMissing);
+					double moneyPossesed = Money.get(msender);
+					double moneyMissing = marriageCost - moneyPossesed;
+					this.sendCheckFailMessage(msender, "money", marriageCost, moneyPossesed, moneyMissing);
 					mplayer.msg("%s <b>did not have enough money to get married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
 					return;
 				}

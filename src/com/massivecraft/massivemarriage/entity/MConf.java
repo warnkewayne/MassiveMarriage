@@ -85,7 +85,8 @@ public class MConf extends Entity<MConf>
 	public ExceptionSet flowers = new ExceptionSet(false,
 		"RED_ROSE",
 		"YELLOW_FLOWER",
-		"DEAD_BUSH"
+		"DEAD_BUSH",
+		"DOUBLE_PLANT"
 		);
 	
 	// -------------------------------------------- //
