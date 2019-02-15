@@ -1,5 +1,6 @@
 package com.massivecraft.massivemarriage.engine;
 
+import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
 import com.massivecraft.massivemarriage.entity.MPlayerColl;
@@ -32,13 +33,13 @@ public class EnginePlayerData extends Engine
 		
 		// ...and a player was kicked from the server ...
 		Player player = event.getPlayer();
-
+		
 		// ... and if the if player was banned (not just kicked) ...
 		//if (!event.getReason().equals("Banned by admin.")) return;
 		if ( ! player.isBanned() ) return;
 		
 		// ... get rid of their stored info.
-		MPlayer mplayer = MPlayer.get(player);
+		MPlayer mplayer = MPlayerColl.get().get(player, false);
 		if ( mplayer == null ) return;
 		
 		// ... if banned player is married

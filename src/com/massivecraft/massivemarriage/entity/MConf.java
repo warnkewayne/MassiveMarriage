@@ -36,7 +36,7 @@ public class MConf extends Entity<MConf>
 	// -------------------------------------------- //
 	
 	// Should players' marriages be removed and their data erased when banned?
-	public boolean removePlayerWhenBanned = true;
+	public boolean removePlayerWhenBanned = false; // TODO: Keep false until issue is resolved.
 	
 	// After how many milliseconds should players be automatically divorced?
 	@EditorType(TypeMillisDiff.class)
