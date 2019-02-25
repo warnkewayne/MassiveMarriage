@@ -48,8 +48,8 @@ public class CmdMarriageDivorce extends MarriageCommand
 		if ( statusChangeEvent.isCancelled() ) return;
 		
 		// Inform
-		partner.msg("%s<i> has divorced you.", MixinDisplayName.get().getDisplayName(msender, partner));
-		msender.msg("<i>You have divorced <white>%s.", MixinDisplayName.get().getDisplayName(partner, msender));
+		partner.msg("%s<i> has divorced %s.", MixinDisplayName.get().getDisplayName(msender, partner), MixinDisplayName.get().getDisplayName(partner, partner));
+		msender.msg("<i>%s have divorced <white>%s.", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(partner, msender));
 		
 		// Apply
 		partner.resetMarriageData();

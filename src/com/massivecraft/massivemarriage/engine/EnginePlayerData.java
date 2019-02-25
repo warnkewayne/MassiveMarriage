@@ -1,6 +1,5 @@
 package com.massivecraft.massivemarriage.engine;
 
-import com.massivecraft.massivecore.mixin.MixinMessage;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
 import com.massivecraft.massivemarriage.entity.MPlayerColl;

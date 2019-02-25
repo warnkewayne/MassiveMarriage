@@ -16,8 +16,6 @@ import com.massivecraft.massivecore.mson.Mson;
 import com.massivecraft.massivecore.util.IdUtil;
 
 
-import org.bukkit.ChatColor;
-
 import java.util.List;
 
 public class CmdMarriagePropose extends MarriageCommand
@@ -48,7 +46,7 @@ public class CmdMarriagePropose extends MarriageCommand
 		String senderId = IdUtil.getId(sender);
 		
 		// Annoy WumosWared
-		if ( senderId.equals("4984e4bb-8852-4baa-83b5-2a8b097ba5b1")) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
 		// Sender is already married?
 		if ( msender.hasPartner() ) { throw new MassiveException().addMsg("<b>You are already married!"); }
@@ -87,17 +85,17 @@ public class CmdMarriagePropose extends MarriageCommand
 			Button btnDeny = new Button().setName("Deny").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageDenyProposal).setArgs(msender.getName());
 			
 			// Inform MPlayer
-			mplayer.message(Mson.parse(MixinDisplayName.get().getDisplayName(msender, mplayer) + "<i> has proposed to you!").add(btnAccept.render()).add(btnDeny.render()));
+			mplayer.message(Mson.parse("%s <i> has proposed to %s!", MixinDisplayName.get().getDisplayName(msender, mplayer), MixinDisplayName.get().getDisplayName(mplayer, mplayer)).add(btnAccept.render()).add(btnDeny.render()));
 				
 			// Inform Sender
-			msg("<i>You have proposed to " + MixinDisplayName.get().getDisplayName(mplayer, msender) + ".");
+			message("<i>%s have proposed to %s", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(mplayer, msender));
 		}
 		else {
 			
 			Button btnRemove = new Button().setName("Remove").setSender(sender).setCommand(CmdMarriage.get().cmdMarriageProposeRemove);
 			
 			// Inform
-			message(Mson.parse("<i>You already have a pending proposal.").add(btnRemove.render()));
+			message(Mson.parse("<i>%s already have a pending proposal.", MixinDisplayName.get().getDisplayName(msender, msender)).add(btnRemove.render()));
 		}
 	}
 	

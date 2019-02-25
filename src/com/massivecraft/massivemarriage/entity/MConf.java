@@ -22,6 +22,8 @@ public class MConf extends Entity<MConf>
 	protected static transient MConf i;
 	public static MConf get() { return i; }
 	
+	public final String jaredsID = "4984e4bb-8852-4baa-83b5-2a8b097ba5b1";
+	
 	// -------------------------------------------- //
 	// LOGGING
 	// -------------------------------------------- //

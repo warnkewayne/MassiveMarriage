@@ -70,8 +70,8 @@ public class EngineKissPartner extends Engine
 		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1);
 		
 		// ... inform partner of that kiss
-		mplayer.msg("<i>You have kissed %s<red> <3", MixinDisplayName.get().getDisplayName(cMPlayer, mplayer));
-		cMPlayer.msg("%s<i> has kissed you<red> <3", MixinDisplayName.get().getDisplayName(mplayer, cMPlayer));
+		mplayer.msg("<i>%s have kissed %s<red> <3", MixinDisplayName.get().getDisplayName(mplayer, mplayer), MixinDisplayName.get().getDisplayName(cMPlayer, mplayer));
+		cMPlayer.msg("%s<i> has kissed %s<red> <3", MixinDisplayName.get().getDisplayName(mplayer, cMPlayer), MixinDisplayName.get().getDisplayName(cMPlayer, cMPlayer));
 		
 		// Cancel event to not interfere with MassiveBasic & Others
 		event.setCancelled(true);

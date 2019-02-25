@@ -41,7 +41,7 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 			
 			// Inform Player
 			proposedPlayer.msg("%s<i> has cancelled their proposal.", MixinDisplayName.get().getDisplayName(msender, proposedPlayer));
-			msender.msg("<i>You have cancelled your proposal to <white>%s", MixinDisplayName.get().getDisplayName(proposedPlayer, msender));
+			message("<i>%s have cancelled your proposal to <white>%s", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(proposedPlayer, msender));
 			
 			// Apply
 			msender.setProposedPlayerId(null);

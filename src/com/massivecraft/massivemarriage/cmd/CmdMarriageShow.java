@@ -10,7 +10,6 @@ import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivemarriage.entity.MPlayer;
-import org.bukkit.ChatColor;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class CmdMarriageShow extends MarriageCommand
 			
 			if( ! msender.hasPartner() )
 			{
-				msg("<i>You are single and ready to mingle!");
+				message("<i>%s are single and ready to mingle!", MixinDisplayName.get().getDisplayName(msender, msender));
 				
 				if ( msender.hasSuitors() )
 				{
@@ -62,7 +61,7 @@ public class CmdMarriageShow extends MarriageCommand
 					}
 					Mson complete = Mson.mson(prefix).add(list);
 					
-					msender.message(complete);
+					message(complete);
 					
 				}
 				if ( msender.getProposedPlayerId() != null )
@@ -70,7 +69,7 @@ public class CmdMarriageShow extends MarriageCommand
 					String unpropose = CmdMarriage.get().cmdMarriageProposeRemove.getCommandLine();
 					
 					// Print proposed player
-					msender.message(Mson.parse("<gold> Proposals Pending: %s", MixinDisplayName.get().getDisplayName(MPlayer.get(msender.getProposedPlayerId()), msender)).suggest(unpropose));
+					message(Mson.parse("<gold> Proposals Pending: %s", MixinDisplayName.get().getDisplayName(MPlayer.get(msender.getProposedPlayerId()), msender)).suggest(unpropose));
 				}
 				return;
 			}
@@ -78,7 +77,7 @@ public class CmdMarriageShow extends MarriageCommand
 			String partnerId = msender.getPartnerId();
 			MPlayer partner = MPlayer.get(partnerId);
 			
-			msg("<i>You are currently married to " + MixinDisplayName.get().getDisplayName(partner, msender));
+			message("<i>%s are currently married to %s.", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(partner, msender));
 			return;
 		}
 		

@@ -17,8 +17,6 @@ import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.money.Money;
 
-import org.bukkit.ChatColor;
-
 import java.util.List;
 
 public class CmdMarriageAcceptProposal extends MarriageCommand
@@ -117,8 +115,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 
 		
 		// Inform
-		mplayer.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
-		msender.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
+		mplayer.msg("<i>%s and %s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, mplayer), MixinDisplayName.get().getDisplayName(msender, mplayer));
+		msender.msg("<i>%s and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(mplayer, msender));
 		
 		// Logging
 		if ( MConf.get().logMarriage )

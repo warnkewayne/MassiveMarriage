@@ -68,6 +68,7 @@ permissions:
       massivemarriage.show: true
       massivemarriage.show.other: true
       massivemarriage.divorce: true
+      massivemarriage.version: true
   massivemarriage.kit.default:
     default: true
     children:
