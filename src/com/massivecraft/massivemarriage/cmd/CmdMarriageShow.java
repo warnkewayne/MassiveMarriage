@@ -45,7 +45,7 @@ public class CmdMarriageShow extends MarriageCommand
 			
 			if( ! msender.hasPartner() )
 			{
-				message("<i>%s are single and ready to mingle!", MixinDisplayName.get().getDisplayName(msender, msender));
+				msender.msg("<i>You are single and ready to mingle!");
 				
 				if ( msender.hasSuitors() )
 				{
@@ -80,7 +80,7 @@ public class CmdMarriageShow extends MarriageCommand
 			String partnerId = msender.getPartnerId();
 			MPlayer partner = MPlayer.get(partnerId);
 			
-			message("<i>%s are currently married to %s.", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(partner, msender));
+			msender.msg("<i>You are currently married to %s.", MixinDisplayName.get().getDisplayName(partner, msender));
 			return;
 		}
 		

@@ -118,8 +118,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 
 		
 		// Inform
-		mplayer.msg("<i>%s and %s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, mplayer), MixinDisplayName.get().getDisplayName(msender, mplayer));
-		msender.msg("<i>%s and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(mplayer, msender));
+		mplayer.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(msender, mplayer));
+		msender.msg("<i>You and %s<i> are now married!", MixinDisplayName.get().getDisplayName(mplayer, msender));
 		
 		// Logging
 		if ( MConf.get().logMarriage )

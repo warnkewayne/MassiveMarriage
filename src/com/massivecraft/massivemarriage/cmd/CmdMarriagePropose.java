@@ -85,17 +85,17 @@ public class CmdMarriagePropose extends MarriageCommand
 			Button btnDeny = new Button().setName("Deny").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageDenyProposal).setArgs(msender.getName());
 			
 			// Inform MPlayer
-			mplayer.message(Mson.parse("%s <i> has proposed to %s!", MixinDisplayName.get().getDisplayName(msender, mplayer), MixinDisplayName.get().getDisplayName(mplayer, mplayer)).add(btnAccept.render()).add(btnDeny.render()));
+			mplayer.message(Mson.parse("%s <i>has proposed to You! ", MixinDisplayName.get().getDisplayName(msender, mplayer)).add(btnAccept.render()).add(btnDeny.render()));
 				
 			// Inform Sender
-			message("<i>%s have proposed to %s", MixinDisplayName.get().getDisplayName(msender, msender), MixinDisplayName.get().getDisplayName(mplayer, msender));
+			msender.msg("<i>You have proposed to %s", MixinDisplayName.get().getDisplayName(mplayer, msender));
 		}
 		else {
 			
 			Button btnRemove = new Button().setName("Remove").setSender(sender).setCommand(CmdMarriage.get().cmdMarriageProposeRemove);
 			
 			// Inform
-			message(Mson.parse("<i>%s already have a pending proposal.", MixinDisplayName.get().getDisplayName(msender, msender)).add(btnRemove.render()));
+			msender.message(Mson.parse("<i>You already have a pending proposal.").add(btnRemove.render()));
 		}
 	}
 	
