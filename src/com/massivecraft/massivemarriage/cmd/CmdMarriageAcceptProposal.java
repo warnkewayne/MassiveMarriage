@@ -47,6 +47,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		// Annoy WumosWared
 		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
+		// Check if same IP address (alt abuse avoid)
+		if ( msender.getIp().equals(mplayer.getIp()) && ! MConf.get().allowedIPs.contains(msender.getIp()) ) throw new MassiveException().addMsg("<b>Same IP Address!");
+		
 		// Check Player has proposal request
 		// Does mplayer have pending proposal?
 		if ( mplayer.getProposedPlayerId() == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");

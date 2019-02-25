@@ -48,6 +48,9 @@ public class CmdMarriagePropose extends MarriageCommand
 		// Annoy WumosWared
 		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
+		// Check if same IP address (alt abuse avoid)
+		if ( msender.getIp().equals(mplayer.getIp()) && ! MConf.get().allowedIPs.contains(msender.getIp()) ) throw new MassiveException().addMsg("<b>Same IP Address!");
+		
 		// Sender is already married?
 		if ( msender.hasPartner() ) { throw new MassiveException().addMsg("<b>You are already married!"); }
 		

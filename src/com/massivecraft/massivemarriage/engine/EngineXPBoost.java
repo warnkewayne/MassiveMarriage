@@ -42,6 +42,9 @@ public class EngineXPBoost extends Engine
 		
 		if (MUtil.isntPlayer(pPartner)) return;
 		
+		// If partner is online ...
+		if ( ! pPartner.isOnline() ) return;
+		
 		// ... check if worlds are null ...
 		String playerWorld = player.getWorld().toString();
 		String partnerWorld = pPartner.getWorld().toString();

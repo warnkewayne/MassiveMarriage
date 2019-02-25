@@ -1,6 +1,7 @@
 package com.massivecraft.massivemarriage.entity;
 
 import com.massivecraft.massivecore.collections.ExceptionSet;
+import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.command.editor.annotation.EditorName;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;
@@ -58,6 +59,12 @@ public class MConf extends Entity<MConf>
 	// and how much it costs for EACH player.
 	
 	public double marriageCostAmount = 50;
+	
+	// -------------------------------------------- //
+	// IP ADDRESS CLEARANCE
+	// -------------------------------------------- //
+	
+	public List<String> allowedIPs = MUtil.list();
 	
 	// -------------------------------------------- //
 	// MARRIAGE XP BOOST
