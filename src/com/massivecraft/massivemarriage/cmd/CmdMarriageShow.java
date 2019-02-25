@@ -36,6 +36,9 @@ public class CmdMarriageShow extends MarriageCommand
 		MPlayer mPlayer = this.readArg(msender); // Player who
 		String mPlayerId = IdUtil.getId(mPlayer);
 		
+		// Annoy WumosWared
+		if ( IdUtil.getId(sender).equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		
 		if( mPlayerId.equals(msender.getId()) )
 		{
 			msg("<gold>_________.[<teal>MassiveMarriage<gold>].__________");

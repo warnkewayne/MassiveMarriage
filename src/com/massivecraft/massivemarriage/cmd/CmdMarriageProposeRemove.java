@@ -2,6 +2,7 @@ package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.mixin.MixinDisplayName;
+import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -28,6 +29,9 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	@Override
 	public void perform() throws MassiveException
 	{
+		// Annoy WumosWared
+		if ( IdUtil.getId(sender).equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		
 		// Check if player has pending proposal
 		if ( msender.getProposedPlayerId() != null )
 		{

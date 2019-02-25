@@ -44,6 +44,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		
 		String senderId = IdUtil.getId(sender); // Player who accepts proposal
 		
+		// Annoy WumosWared
+		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		
 		// Check Player has proposal request
 		// Does mplayer have pending proposal?
 		if ( mplayer.getProposedPlayerId() == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");

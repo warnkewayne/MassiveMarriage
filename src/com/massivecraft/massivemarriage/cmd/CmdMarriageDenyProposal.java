@@ -38,6 +38,9 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		
 		String senderId = IdUtil.getId(sender);
 		
+		// Annoy WumosWared
+		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		
 		// Check Player has proposal request
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
