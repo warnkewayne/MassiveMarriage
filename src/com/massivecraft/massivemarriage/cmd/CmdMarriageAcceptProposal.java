@@ -130,16 +130,8 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		// Server Broadcasts
 		if ( MConf.get().broadcastMarriages )
 		{
-			//Mson
-			Mson broadcastTitle = Mson.mson("[MassiveMarriage] ");
-			broadcastTitle = broadcastTitle.color(ChatColor.DARK_AQUA);
-			Mson message = Mson.mson(msender.getName() + " and " + mplayer.getName() + " have gotten married!");
-			message = message.color(ChatColor.WHITE);
-			
-			Mson fullMessage = Mson.mson(broadcastTitle).add(message);
-			
 			// Broadcast a message
-			MixinMessage.get().messageAll(fullMessage);
+			MixinMessage.get().messageAll(Mson.parse("<teal>[MassiveMarriage] <white>%s and %s have gotten married!", msender.getName(), mplayer.getName()));
 		}
 		
 	}

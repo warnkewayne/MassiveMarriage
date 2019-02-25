@@ -49,7 +49,7 @@ public class CmdMarriageShow extends MarriageCommand
 				{
 					MassiveSet<String> suitors = msender.getSuitors();
 					// Print suitors
-					Mson prefix = Mson.mson(ChatColor.GOLD + "Proposals to You: ");
+					Mson prefix = Mson.parse("<gold>Proposals to You: ");
 					Mson list = Mson.mson();
 					
 					for(String suitorId: suitors)
@@ -70,12 +70,7 @@ public class CmdMarriageShow extends MarriageCommand
 					String unpropose = CmdMarriage.get().cmdMarriageProposeRemove.getCommandLine();
 					
 					// Print proposed player
-					Mson mson = Mson.mson(
-						mson (ChatColor.GOLD + "Proposals Pending: "),
-						mson(MixinDisplayName.get().getDisplayName(MPlayer.get(msender.getProposedPlayerId()), msender)).suggest(unpropose)
-					);
-					
-					msender.message(mson);
+					msender.message(Mson.parse("<gold> Proposals Pending: %s", MixinDisplayName.get().getDisplayName(MPlayer.get(msender.getProposedPlayerId()), msender)).suggest(unpropose));
 				}
 				return;
 			}
