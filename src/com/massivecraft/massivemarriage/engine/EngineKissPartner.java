@@ -8,6 +8,7 @@ import com.massivecraft.massivemarriage.entity.MPlayer;
 import com.massivecraft.massivecore.Engine;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -66,8 +67,8 @@ public class EngineKissPartner extends Engine
 		if( checkCooldown(player) ) { event.setCancelled(true); return; }
 		
 		// ... then send kisses <3 <3 <3 ...
-		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1);
-		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1);
+		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 10, 1);
+		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 10, 1);
 		
 		// ... inform partner of that kiss
 		mplayer.msg("<i>You have kissed %s<red> <3", MixinDisplayName.get().getDisplayName(cMPlayer, mplayer));

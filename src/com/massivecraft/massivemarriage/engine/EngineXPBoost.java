@@ -39,11 +39,15 @@ public class EngineXPBoost extends Engine
 		// If partner is married ...
 		if( ! mplayer.hasPartner() ) return;
 		final Player pPartner = IdUtil.getPlayer(mplayer.getPartnerId());
+		final MPlayer mPartner = MPlayer.get(pPartner);
 		
 		if (MUtil.isntPlayer(pPartner)) return;
 		
 		// If partner is online ...
 		if ( ! pPartner.isOnline() ) return;
+		
+		// Check if same IP address (alt abuse avoid)
+		if ( mplayer.getIp().equals(mPartner.getIp()) && ! MConf.get().allowedIPs.contains(mplayer.getIp()) ) return;
 		
 		// ... check if worlds are null ...
 		String playerWorld = player.getWorld().toString();
