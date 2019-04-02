@@ -67,8 +67,8 @@ public class EngineKissPartner extends Engine
 		if( checkCooldown(player) ) { event.setCancelled(true); return; }
 		
 		// ... then send kisses <3 <3 <3 ...
-		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 10, 1);
-		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 10, 1);
+		playerWorld.spawnParticle(Particle.HEART, playerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 1, 1);
+		partnerWorld.spawnParticle(Particle.HEART, partnerLocation, 1); playerWorld.playSound(playerLocation, Sound.ENTITY_CHICKEN_EGG, 1, 1);
 		
 		// ... inform partner of that kiss
 		mplayer.msg("<i>You have kissed %s<red> <3", MixinDisplayName.get().getDisplayName(cMPlayer, mplayer));
