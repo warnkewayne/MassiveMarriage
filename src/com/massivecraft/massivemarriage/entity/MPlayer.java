@@ -27,6 +27,16 @@ public class MPlayer extends SenderEntity<MPlayer>
 		
 		return this;
 	}
+
+	@Override
+	public void preClean()
+	{
+		if(partnerId != null)
+		{
+			MPlayer.get(partnerId).resetMarriageData();
+			this.resetMarriageData();
+		}
+	}
 	
 	// -------------------------------------------- //
 	// FIELDS: RAW
@@ -52,8 +62,6 @@ public class MPlayer extends SenderEntity<MPlayer>
 	// MPlayer.
 	// Default is set to empty.
 	private MassiveSet<String> suitors = new MassiveSet<>();
-	
-	
 
 	// -------------------------------------------- //
 	// CORE UTILITIES

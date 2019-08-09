@@ -52,10 +52,10 @@ public class EventMarriageStatusChange extends EventMarriageAbstractSender
 	
 	public enum StatusChangeReason
 	{
-		// Join
+		// Married
 		MARRY (true),
 		
-		// Leave
+		// Divorced
 		DIVORCE (true),
 		;
 		

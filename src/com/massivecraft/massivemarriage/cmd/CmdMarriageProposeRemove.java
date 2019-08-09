@@ -2,7 +2,6 @@ package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.mixin.MixinDisplayName;
-import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
 import com.massivecraft.massivemarriage.entity.MPlayer;
@@ -30,32 +29,27 @@ public class CmdMarriageProposeRemove extends MarriageCommand
 	public void perform() throws MassiveException
 	{
 		// Annoy WumosWared
-		if ( IdUtil.getId(sender).equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		if ( msender.getId().equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
 		// Check if player has pending proposal
-		if ( msender.getProposedPlayerId() != null )
-		{
-			MPlayer proposedPlayer = MPlayer.get(msender.getProposedPlayerId());
+		if ( msender.getProposedPlayerId() == null ) throw new MassiveException().addMsg("<b>You do not have a pending proposal.");
+
+		MPlayer proposedPlayer = MPlayer.get(msender.getProposedPlayerId());
 			
-			// Event
-			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, proposedPlayer, true);
-			event.run();
+		// Event
+		EventMarriageProposalChange event = new EventMarriageProposalChange(sender, proposedPlayer, true);
+		event.run();
 			
-			if (event.isCancelled()) return;
+		if (event.isCancelled()) return;
 			
-			// Inform Player
-			proposedPlayer.msg("%s<i> has cancelled their proposal.", MixinDisplayName.get().getDisplayName(msender, proposedPlayer));
-			msender.msg("<i>You have cancelled your proposal to %s", MixinDisplayName.get().getDisplayName(proposedPlayer, msender));
+		// Inform Player
+		proposedPlayer.msg("%s<i> has cancelled their proposal.", MixinDisplayName.get().getDisplayName(msender, proposedPlayer));
+		msender.msg("<i>You have cancelled your proposal to %s", MixinDisplayName.get().getDisplayName(proposedPlayer, msender));
 			
-			// Apply
-			msender.setProposedPlayerId(null);
-			proposedPlayer.removeFromSuitors(msender.getId());
-		}
-		else
-		{
-			// Inform player
-			throw new MassiveException().addMsg("<b>You do not have a pending proposal.");
-		}
+		// Apply
+		msender.setProposedPlayerId(null);
+		proposedPlayer.removeFromSuitors(msender.getId());
+
 	}
 	
 	@Override

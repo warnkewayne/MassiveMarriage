@@ -10,7 +10,6 @@ import com.massivecraft.massivemarriage.entity.MPlayer;
 import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 import com.massivecraft.massivecore.MassiveException;
-import com.massivecraft.massivecore.util.IdUtil;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		// Args
 		MPlayer mplayer = this.readArg();
 		
-		String senderId = IdUtil.getId(sender);
+		String senderId = msender.getId();
 		
 		// Annoy WumosWared
 		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
@@ -44,8 +43,7 @@ public class CmdMarriageDenyProposal extends MarriageCommand
 		// Check Player has proposal request
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
-		if ( mpPpId == null ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
-		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
+		if ( mpPpId == null || ! mpPpId.equals(senderId) ) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
 		
 		// Event
 		EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, true);

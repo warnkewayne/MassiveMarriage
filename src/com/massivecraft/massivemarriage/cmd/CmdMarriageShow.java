@@ -4,7 +4,6 @@ import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.mixin.MixinDisplayName;
 import com.massivecraft.massivecore.mson.Mson;
-import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.cmd.type.TypeMPlayer;
 import com.massivecraft.massivemarriage.entity.MConf;
@@ -34,12 +33,14 @@ public class CmdMarriageShow extends MarriageCommand
 	public void perform() throws MassiveException
 	{
 		MPlayer mPlayer = this.readArg(msender); // Player who
-		String mPlayerId = IdUtil.getId(mPlayer);
-		
+		String mPlayerId = mPlayer.getId();
+
+		String msenderId = msender.getId();
+
 		// Annoy WumosWared
-		if ( IdUtil.getId(sender).equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		if ( msenderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
-		if( mPlayerId.equals(msender.getId()) )
+		if( mPlayerId.equals(msenderId) )
 		{
 			msg("<gold>_________.[<teal>MassiveMarriage<gold>].__________");
 			

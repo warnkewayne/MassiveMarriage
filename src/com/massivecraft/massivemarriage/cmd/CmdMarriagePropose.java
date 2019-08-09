@@ -13,7 +13,6 @@ import com.massivecraft.massivemarriage.event.EventMarriageProposalChange;
 
 import com.massivecraft.massivecore.MassiveException;
 import com.massivecraft.massivecore.mson.Mson;
-import com.massivecraft.massivecore.util.IdUtil;
 
 
 import java.util.List;
@@ -42,8 +41,8 @@ public class CmdMarriagePropose extends MarriageCommand
 	{
 		// Arg
 		MPlayer mplayer = this.readArg();
-		String mplayerId = IdUtil.getId(mplayer);
-		String senderId = IdUtil.getId(sender);
+		String mplayerId = mplayer.getId();
+		String senderId = msender.getId();
 		
 		// Annoy WumosWared
 		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
@@ -74,32 +73,34 @@ public class CmdMarriagePropose extends MarriageCommand
 			
 			
 		// Already proposed?
-		if ( msender.getProposedPlayerId() == null )
+		if(msender.getProposedPlayerId() != null)
 		{
-			// Event
-			EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, false);
-			event.run();
-			if (event.isCancelled()) return;
-				
-			// Store
-			mplayer.addToSuitors(senderId); msender.setProposedPlayerId(mplayerId);
-			
-			Button btnAccept = new Button().setName("Accept").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageAcceptProposal).setArgs(msender.getName()).setPaddingRight(true);
-			Button btnDeny = new Button().setName("Deny").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageDenyProposal).setArgs(msender.getName());
-			
-			// Inform MPlayer
-			mplayer.message(Mson.parse("%s <i>has proposed to You! ", MixinDisplayName.get().getDisplayName(msender, mplayer)).add(btnAccept.render()).add(btnDeny.render()));
-				
-			// Inform Sender
-			msender.msg("<i>You have proposed to %s", MixinDisplayName.get().getDisplayName(mplayer, msender));
-		}
-		else {
-			
 			Button btnRemove = new Button().setName("Remove").setSender(sender).setCommand(CmdMarriage.get().cmdMarriageProposeRemove);
-			
+
 			// Inform
 			msender.message(Mson.parse("<i>You already have a pending proposal.").add(btnRemove.render()));
+
+			return;
 		}
+
+		// Event
+		EventMarriageProposalChange event = new EventMarriageProposalChange(sender, mplayer, false);
+		event.run();
+
+		if (event.isCancelled()) return;
+				
+		// Store
+		mplayer.addToSuitors(senderId); msender.setProposedPlayerId(mplayerId);
+
+		Button btnAccept = new Button().setName("Accept").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageAcceptProposal).setArgs(msender.getName()).setPaddingRight(true);
+		Button btnDeny = new Button().setName("Deny").setSender(mplayer.getSender()).setCommand(CmdMarriage.get().cmdMarriageDenyProposal).setArgs(msender.getName());
+
+		// Inform MPlayer
+		mplayer.message(Mson.parse("%s <i>has proposed to You! ", MixinDisplayName.get().getDisplayName(msender, mplayer)).add(btnAccept.render()).add(btnDeny.render()));
+
+		// Inform Sender
+		msender.msg("<i>You have proposed to %s", MixinDisplayName.get().getDisplayName(mplayer, msender));
+
 	}
 	
 	@Override

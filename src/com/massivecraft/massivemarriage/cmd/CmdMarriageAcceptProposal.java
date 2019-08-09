@@ -13,7 +13,6 @@ import com.massivecraft.massivemarriage.event.EventMarriageStatusChange;
 import com.massivecraft.massivemarriage.event.EventMarriageStatusChange.StatusChangeReason;
 
 import com.massivecraft.massivecore.MassiveException;
-import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivecore.util.Txt;
 import com.massivecraft.massivecore.money.Money;
 
@@ -40,9 +39,9 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 	{
 		// Args
 		MPlayer mplayer = this.readArg(); // Player who sent proposal
-		String mplayerId = IdUtil.getId(mplayer);
+		String mplayerId = mplayer.getId();
 		
-		String senderId = IdUtil.getId(sender); // Player who accepts proposal
+		String senderId = msender.getId(); // Player who accepts proposal
 		
 		// Annoy WumosWared
 		if ( senderId.equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
@@ -57,13 +56,13 @@ public class CmdMarriageAcceptProposal extends MarriageCommand
 		// Is the proposal request to sender?
 		String mpPpId = mplayer.getProposedPlayerId();
 		if ( ! mpPpId.equals(senderId)) throw new MassiveException().addMsg("<b>They did not send you a proposal!");
-			
-		// Check Player is married
-		if ( mplayer.hasPartner() ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!");
-		
+
 		// Check if Sender is married
 		if ( msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are already married. You cannot accept a proposal.");
-		
+
+		// Check Player is married
+		if ( mplayer.hasPartner() ) throw new MassiveException().addMsg("<b>They are already married. Don't be a homewrecker!");
+
 		// Marriage Costs Regals
 		if ( MConf.get().marriageCostAmount > 0 )
 		{

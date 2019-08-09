@@ -1,7 +1,6 @@
 package com.massivecraft.massivemarriage.entity;
 
 import com.massivecraft.massivecore.collections.ExceptionSet;
-import com.massivecraft.massivecore.collections.MassiveSet;
 import com.massivecraft.massivecore.command.editor.annotation.EditorName;
 import com.massivecraft.massivecore.command.editor.annotation.EditorType;
 import com.massivecraft.massivecore.command.editor.annotation.EditorTypeInner;

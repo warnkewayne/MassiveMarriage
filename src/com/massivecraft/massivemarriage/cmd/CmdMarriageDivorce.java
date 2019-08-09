@@ -2,7 +2,6 @@ package com.massivecraft.massivemarriage.cmd;
 
 import com.massivecraft.massivecore.command.requirement.RequirementHasPerm;
 import com.massivecraft.massivecore.mixin.MixinDisplayName;
-import com.massivecraft.massivecore.util.IdUtil;
 import com.massivecraft.massivemarriage.MassiveMarriage;
 import com.massivecraft.massivemarriage.Perm;
 import com.massivecraft.massivemarriage.entity.MConf;
@@ -36,7 +35,7 @@ public class CmdMarriageDivorce extends MarriageCommand
 	public void perform() throws MassiveException
 	{
 		// Annoy WumosWared
-		if ( IdUtil.getId(sender).equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
+		if ( msender.getId().equals(MConf.get().jaredsID)) throw new MassiveException().addMsg("<b>Sorry Jared, give Rusty his credit.");
 		
 		// Check if sender is married
 		if( ! msender.hasPartner() ) throw new MassiveException().addMsg("<b>You are not married!");
